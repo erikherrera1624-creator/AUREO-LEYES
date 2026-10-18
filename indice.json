@@ -1,1 +1,20 @@
-{"generado": "2026-10-18T16:30-06:00", "dof_revisado": "2026-10-17", "paquetes": []}
+{
+ "generado": "2026-10-18T16:22-06:00",
+ "dof_revisado": "2026-10-16",
+ "paquetes": [
+  {
+   "id": "20261018-1622",
+   "fecha": "2026-10-18",
+   "archivo": "actualizaciones/20261018-1622.json",
+   "titulo": "DOF del 16/10/2026: 4 publicaciones fiscales e indicadores",
+   "leyes": [],
+   "bytes": 4692,
+   "claves_dof": [
+    "dof_5801379",
+    "dof_5801457",
+    "dof_5801458",
+    "dof_5801459"
+   ]
+  }
+ ]
+}

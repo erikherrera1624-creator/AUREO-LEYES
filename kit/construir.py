@@ -95,7 +95,9 @@ if hay:
     while pid in ya: pid += 'b'
     titulo = '; '.join([f"{(F[c]['nombre'] if F[c].get('nombre') else c.upper())}: {e}" for c, e, _ in cambiadas][:6])
     if dof['decretos']: titulo = (titulo + '; ' if titulo else '') + f"{len(dof['decretos'])} decreto(s) de reforma en el DOF"
-    if not titulo and dof['noticias']: titulo = f"{len(dof['noticias'])} publicaciones del DOF"
+    if not titulo and (dof['noticias'] or dof['indicadores']):
+        fs = ', '.join(f'{x[6:]}/{x[4:6]}/{x[:4]}' for x in fechas_dof)
+        titulo = f"DOF del {fs}: {len(dof['noticias'])} publicaciones fiscales" + (' e indicadores' if dof['indicadores'] else '')
     if '--etiqueta' in sys.argv: titulo = sys.argv[sys.argv.index('--etiqueta') + 1]
     paquete = dict(id=pid, fecha=hoy, titulo=titulo, leyes=leyes + dof['leyes'], reformas=dof['reformas'], decretos=dof['decretos'], noticias=dof['noticias'], indicadores=dof['indicadores'])
     archivo = f'actualizaciones/{pid}.json'; os.makedirs(R + '/actualizaciones', exist_ok=True)
