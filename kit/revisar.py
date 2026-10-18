@@ -24,7 +24,7 @@ for d in D.get('descubrir', []):
     fs = glob.glob(K + '/tmp/cab/DESC' + re.sub(r'[^A-Za-z0-9]', '', d['clave']).upper() + '_*.json')
     if not fs: continue
     for e in json.load(open(sorted(fs)[-1])):
-        if e['u'].lower().endswith('.pdf') and e['u'] not in d['conocidos']: nuevos_docs.append({'clave': d['clave'], 'url': e['u'], 'titulo': e['t']})
+        if e['u'].lower().endswith('.pdf') and re.search(d['patron'], e['u'], re.I) and e['u'] not in d['conocidos']: nuevos_docs.append({'clave': d['clave'], 'url': e['u'], 'titulo': e['t']})
 json.dump(D, open(K + '/fuentes.json', 'w'), ensure_ascii=False, indent=1)
 lotes = {}
 for c in cambios:
