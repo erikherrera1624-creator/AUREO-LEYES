@@ -29,7 +29,9 @@ S = json.load(open(ruta(fecha, 'DOF')))
 if isinstance(S.get('notas'), str): S['notas'] = json.loads(S['notas'])
 sel = [n for n in S['notas'] if relevante(n)]
 if modo == 'seleccionar':
-    js = 'preparar(await textosDOF(' + json.dumps([{'codigo': n['codigo'], 'url': n['url']} for n in sel], ensure_ascii=False) + '))'
+    etq = 'DOFTX' + fecha.replace('-', '')
+    js = ('if (typeof textosDOF !== "function") await (new Function("return (async()=>{" + await (await fetch("https://raw.githubusercontent.com/erikherrera1624-creator/AUREO-LEYES/main/kit/navegador.js?t=" + Date.now(), { cache: "no-store" })).text() + "\\n})()"))();\n'
+          + 'const t = preparar(await textosDOF(' + json.dumps([{'codigo': n['codigo'], 'url': n['url']} for n in sel], ensure_ascii=False) + ')); t + "\\n" + paq("' + etq + '", 0)')
     open(f'{K}/tmp/dof/seleccion_{fecha}.js', 'w').write(js)
     print(len(S['notas']), 'notas;', len(sel), 'relevantes'); [print(' -', relevante(n), n['dependencia'][:40], '|', n['titulo'][:110]) for n in sel]
     print('instrucción en kit/tmp/dof/seleccion_' + fecha + '.js (etiqueta sugerida DOFTX' + fecha.replace('-', '') + ')'); sys.exit()
@@ -50,7 +52,7 @@ for n in sel:
         if m: continue
     ks = leyes_de(n['titulo'] + ' ' + ' '.join(ps[:6]))
     es_reforma = bool(re.match(r'(decreto por el que se (reforma|adiciona|deroga|expide|abroga))|(.*resolucion de modificaciones a la resolucion miscelanea)', norm(n['titulo'])))
-    resumen = ' '.join(p for p in ps[1:4] if len(p) > 40)[:420] or n['titulo']
+    resumen = ' '.join(p for p in ps[1:8] if len(p) > 40 and not re.match(r'(Al margen|En el documento que usted)', p))[:420] or n['titulo']
     out['noticias']['dof_' + n['codigo']] = dict(titulo=n['titulo'][:300], fecha=fecha, fuente=f"DOF, {ED.get(n['edicion'], n['edicion'])}", autoridad=n['dependencia'].title() or n['poder'].title(),
         tipo='reforma' if es_reforma else 'resolucion' if norm(n['titulo']).startswith(('resolucion', 'reglas')) else 'acuerdo' if norm(n['titulo']).startswith('acuerdo') else 'noticia',
         tema='fiscal' if re.search(r'hacienda|tributaria|impuest|fiscal|aduan', norm(n['dependencia'] + n['titulo'])) else 'seguridad_social' if re.search(r'seguro social|vivienda|retiro', norm(n['dependencia'] + n['titulo'])) else 'laboral' if re.search(r'trabajo|salari', norm(n['dependencia'] + n['titulo'])) else 'fiscal',

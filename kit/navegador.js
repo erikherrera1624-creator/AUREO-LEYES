@@ -59,8 +59,11 @@ window.sumarioDOF = async fecha => { const [y, m, d] = fecha.split("-"); const o
   return { fecha, notas: out }; };
 // texto completo de notas del DOF (párrafos)
 window.textosDOF = async notas => { const o = {}; for (const n of notas) { try { const h = await (await fetch(n.url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const c = d.querySelector("#DivDetalleNota") || d.body;
-    c.querySelectorAll("style,script").forEach(e => e.remove()); const ps = [...c.querySelectorAll("p,h1,h2,h3,td")].filter(e => !e.querySelector("p,td")).map(e => limpio(e.textContent)).filter(Boolean);
-    o[n.codigo] = ps.length ? ps : limpio(c.textContent).split(/(?<=\.)\s+(?=[A-ZÁÉÍÓÚÑ])/); } catch (e) { o[n.codigo] = ["ERROR " + e.message]; } } return o; };
+    c.querySelectorAll("style,script").forEach(e => e.remove());
+    const ps = []; const w = d.createTreeWalker(c, NodeFilter.SHOW_TEXT); let t, ult = null, buf = "";
+    while ((t = w.nextNode())) { const b = t.parentElement.closest("p,div,td,li,h1,h2,h3,h4") || c; if (b !== ult) { if (limpio(buf)) ps.push(limpio(buf)); buf = ""; ult = b; } buf += t.textContent + " "; }
+    if (limpio(buf)) ps.push(limpio(buf));
+    o[n.codigo] = ps.filter(p => !/^En el documento que usted está visualizando/.test(p)); } catch (e) { o[n.codigo] = ["ERROR " + e.message]; } } return o; };
 // enlaces de una página (para descubrir compilaciones nuevas de la RMF, por ejemplo)
 window.enlaces = async (url, patron) => { const h = await (await fetch(url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const re = new RegExp(patron, "i");
   return [...d.querySelectorAll("a")].map(a => ({ t: limpio(a.textContent), u: new URL(a.getAttribute("href") || "", url).href })).filter(x => re.test(x.t + " " + x.u)); };
