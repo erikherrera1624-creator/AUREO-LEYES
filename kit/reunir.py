@@ -8,7 +8,7 @@ if '--patron' in sys.argv:   # reúne todas las etiquetas que cumplan el patrón
     import subprocess
     pat = re.compile(etq); vistas = set()
     for f in glob.glob('/root/.claude/projects/*/*/tool-results/*') + glob.glob('/root/.claude/projects/*/tool-results/*'):
-        try: t = open(f).read(400)
+        try: t = open(f).read()
         except Exception: continue
         for m in re.finditer(r'<<([A-Za-z0-9_\-]+)\|\d+\|\d+>>', t):
             if pat.search(m.group(1)): vistas.add(m.group(1))
@@ -18,15 +18,18 @@ tro, total = {}, None
 for f in glob.glob('/root/.claude/projects/*/*/tool-results/*') + glob.glob('/root/.claude/projects/*/tool-results/*'):
     try: crudo = json.load(open(f))
     except Exception: continue
-    t = crudo[0]['text'] if isinstance(crudo, list) and crudo and isinstance(crudo[0], dict) else ''
-    k = t.find('<<' + etq + '|')
-    if k < 0: continue
-    try: t = json.loads(t[:t.rindex('"') + 1])
-    except Exception: pass
-    k = t.find('<<' + etq + '|'); m = re.match(r'<<([^|]+)\|(\d+)\|(\d+)>>', t[k:])
-    if not m or m.group(1) != etq: continue
-    i, n = int(m.group(2)), int(m.group(3)); total = n
-    cuerpo = t[k + m.end():]; tro[i] = cuerpo[:cuerpo.index('<<FIN>>')]
+    piezas = [x.get('text', '') for x in crudo if isinstance(x, dict)] if isinstance(crudo, list) else []
+    for t in piezas:
+        if t.find('<<' + etq + '|') < 0: continue
+        # el texto puede venir como cadena JSON («"<<…"») o directo
+        for cand in re.findall(r'"(?:[^"\\]|\\.)*"', t) or [t]:
+            if '<<' + etq + '|' not in cand: continue
+            try: cand = json.loads(cand)
+            except Exception: pass
+            k = cand.find('<<' + etq + '|'); m = re.match(r'<<([^|]+)\|(\d+)\|(\d+)>>', cand[k:])
+            if not m or m.group(1) != etq: continue
+            i, n = int(m.group(2)), int(m.group(3)); total = n
+            cuerpo = cand[k + m.end():]; tro[i] = cuerpo[:cuerpo.index('<<FIN>>')]
 assert total is not None, 'sin trozos para ' + etq
 falta = [i for i in range(total) if i not in tro]; assert not falta, f'faltan trozos {falta}'
 todo = ''.join(tro[i] for i in range(total)); os.makedirs(salida, exist_ok=True)
