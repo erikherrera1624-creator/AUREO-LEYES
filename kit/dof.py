@@ -1,6 +1,6 @@
 """Diario Oficial de la Federación → noticias, indicadores y decretos de reforma para la aplicación.
-1) python3 kit/dof.py seleccionar AAAA-MM-DD   lee kit/tmp/dof/DOFAAAAMMDD.json (sumarioDOF) y escribe la instrucción textosDOF(...) para las notas relevantes
-2) python3 kit/dof.py procesar AAAA-MM-DD      lee además kit/tmp/dof/DOFTXAAAAMMDD.json (textosDOF) y escribe kit/tmp/dof_AAAAMMDD.json"""
+1) python3 kit/dof.py seleccionar AAAA-MM-DD CORRIDA   lee kit/tmp/dof/DOFAAAAMMDD_*.json (sumarioDOF) y escribe la instrucción textosDOF(...) para las notas relevantes
+2) python3 kit/dof.py procesar AAAA-MM-DD CORRIDA      lee además kit/tmp/dof/DOFTXAAAAMMDD_*.json (textosDOF) y escribe kit/tmp/dof_AAAAMMDD.json"""
 import json, os, re, sys, gzip, base64, unicodedata
 K = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, K)
 from decretos_comun import NOMBRES, procesar
@@ -23,13 +23,18 @@ def relevante(n):
     return ''
 def leyes_de(t):
     n = norm(t); return [k for k, p in NOMBRES.items() if re.search(p, n)]
-def ruta(f, pre): return f'{K}/tmp/dof/{pre}{f.replace("-", "")}.json'
-modo, fecha = sys.argv[1], sys.argv[2]
+import glob as _g
+def ruta(f, pre):
+    fs = sorted(_g.glob(f'{K}/tmp/dof/{pre}{f.replace("-", "")}_*.json') + _g.glob(f'{K}/tmp/dof/{pre}{f.replace("-", "")}.json'), key=os.path.getmtime)
+    return fs[-1] if fs else f'{K}/tmp/dof/{pre}{f.replace("-", "")}.json'
+modo, fecha = sys.argv[1], sys.argv[2]; corrida = sys.argv[3] if len(sys.argv) > 3 else ''
+MINUS = {'de', 'del', 'la', 'las', 'los', 'y', 'e', 'para', 'en', 'el', 'a'}
+def titulo_dep(t): return ' '.join(w.lower() if (w.lower() in MINUS and i) else w.capitalize() for i, w in enumerate((t or '').split()))
 S = json.load(open(ruta(fecha, 'DOF')))
 if isinstance(S.get('notas'), str): S['notas'] = json.loads(S['notas'])
 sel = [n for n in S['notas'] if relevante(n)]
 if modo == 'seleccionar':
-    etq = 'DOFTX' + fecha.replace('-', '')
+    etq = 'DOFTX' + fecha.replace('-', '') + ('_' + corrida if corrida else '')
     js = ('if (typeof textosDOF !== "function") await (new Function("return (async()=>{" + await (await fetch("https://raw.githubusercontent.com/erikherrera1624-creator/AUREO-LEYES/main/kit/navegador.js?t=" + Date.now(), { cache: "no-store" })).text() + "\\n})()"))();\n'
           + 'const t = preparar(await textosDOF(' + json.dumps([{'codigo': n['codigo'], 'url': n['url']} for n in sel], ensure_ascii=False) + ')); t + "\\n" + paq("' + etq + '", 0)')
     open(f'{K}/tmp/dof/seleccion_{fecha}.js', 'w').write(js)
@@ -53,7 +58,7 @@ for n in sel:
     ks = leyes_de(n['titulo'] + ' ' + ' '.join(ps[:6]))
     es_reforma = bool(re.match(r'(decreto por el que se (reforma|adiciona|deroga|expide|abroga))|(.*resolucion de modificaciones a la resolucion miscelanea)', norm(n['titulo'])))
     resumen = ' '.join(p for p in ps[1:8] if len(p) > 40 and not re.match(r'(Al margen|En el documento que usted)', p))[:420] or n['titulo']
-    out['noticias']['dof_' + n['codigo']] = dict(titulo=n['titulo'][:300], fecha=fecha, fuente=f"DOF, {ED.get(n['edicion'], n['edicion'])}", autoridad=n['dependencia'].title() or n['poder'].title(),
+    out['noticias']['dof_' + n['codigo']] = dict(titulo=n['titulo'][:300], fecha=fecha, fuente=f"DOF, {ED.get(n['edicion'], n['edicion'])}", autoridad=titulo_dep(n['dependencia'] or n['poder']),
         tipo='reforma' if es_reforma else 'resolucion' if norm(n['titulo']).startswith(('resolucion', 'reglas')) else 'acuerdo' if norm(n['titulo']).startswith('acuerdo') else 'noticia',
         tema='fiscal' if re.search(r'hacienda|tributaria|impuest|fiscal|aduan', norm(n['dependencia'] + n['titulo'])) else 'seguridad_social' if re.search(r'seguro social|vivienda|retiro', norm(n['dependencia'] + n['titulo'])) else 'laboral' if re.search(r'trabajo|salari', norm(n['dependencia'] + n['titulo'])) else 'fiscal',
         relevancia=1 if es_reforma else 2, resumen=resumen, relevancia_profesional='Texto publicado en el Diario Oficial; la aplicación lo incorporó en automático. Verifique la entrada en vigor en sus transitorios.' if es_reforma else '',
