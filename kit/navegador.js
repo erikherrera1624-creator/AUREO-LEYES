@@ -43,7 +43,7 @@ window.paq = (e, i) => { const n = Math.ceil(window.__P.length / 300000); const 
 // encabezados de control: fecha de modificación, tamaño y etiqueta; si el sitio no da ninguno, huella del contenido
 window.cabeceras = async L => { const o = {}; let k = 0;
   const uno = async ([clave, url, modo, enc]) => { try { let r; try { r = await fetch(url, { method: "HEAD" }); } catch (e) { r = { ok: false, status: 0, headers: new Headers() }; } let lm = r.headers.get("last-modified") || "", et = r.headers.get("etag") || "", cl = r.headers.get("content-length") || "";
-      let h = ""; if (!r.ok || (!lm && !et) || modo === "html") { r = await fetch(url); const b = new Uint8Array(await r.arrayBuffer());
+      let h = ""; if (!r.ok || (!lm && !et) || modo === "html") { r = await fetch(url); const b = new Uint8Array(await r.arrayBuffer()); lm = r.headers.get("last-modified") || lm; et = r.headers.get("etag") || et;
         let datos = b; if (modo === "html") { datos = new TextEncoder().encode(paginasHtml(new TextDecoder(enc || "utf-8").decode(b)).join("\n")); }
         h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", datos))].map(x => x.toString(16).padStart(2, "0")).join("").slice(0, 24); cl = String(b.length); }
       o[clave] = { s: r.status, lm, et, cl, h }; } catch (e) { o[clave] = { s: 0, err: e.message.slice(0, 80) }; } };
