@@ -70,6 +70,20 @@ window.textosDOF = async notas => { const o = {}; for (const n of notas) { try {
 // enlaces de una página (para descubrir compilaciones nuevas de la RMF, por ejemplo)
 window.enlaces = async (url, patron) => { const h = await (await fetch(url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const re = new RegExp(patron, "i");
   return [...d.querySelectorAll("a")].map(a => ({ t: limpio(a.textContent), u: new URL(a.getAttribute("href") || "", url).href })).filter(x => re.test(x.t + " " + x.u)); };
+// ---- listados de leyes: todas las ligas a documentos de la página abierta y de otras páginas del mismo sitio ----
+window.textoDe = async url => { const r = await fetch(url); const b = new Uint8Array(await r.arrayBuffer()); let cs = ((r.headers.get("content-type") || "").match(/charset=([\w-]+)/i) || [])[1];
+  if (!cs) { const ini = new TextDecoder("latin1").decode(b.subarray(0, 3000)); cs = (ini.match(/charset=["']?([\w-]+)/i) || [])[1] || "utf-8"; }
+  try { return new TextDecoder(cs).decode(b); } catch (e) { return new TextDecoder("utf-8").decode(b); } };
+window.enlacesAqui = async (paginas) => { const res = new Map();
+  const tomar = (doc, base) => doc.querySelectorAll("a[href], [onclick]").forEach(a => { let h = a.getAttribute("href") || "";
+      const js = (h + " " + (a.getAttribute("onclick") || "")).match(/['"]([^'"]+\.(?:pdf|docx?))['"]/i); if (js && (!h || h.startsWith("javascript"))) h = js[1];
+      if (!h || h.startsWith("javascript") || h.startsWith("#") || h.startsWith("mailto")) return; let u; try { u = new URL(h, base).href; } catch (e) { return; }
+      const t = limpio(a.textContent || a.getAttribute("title") || ""); const fila = a.closest("tr,li,article,p") || a.parentElement; const r = fila ? limpio(fila.textContent).slice(0, 320) : "";
+      if (!/\.(pdf|docx?)(\?|#|$)|descarg|download|\/file\b|archivo|ley&cual|uuid=|attachments|documento/i.test(u) && !/ley|c[oó]digo|constituci/i.test(t)) return;
+      if (!res.has(u)) res.set(u, { t: t.slice(0, 220), r, u }); });
+  tomar(document, location.href);
+  for (const p of (paginas || [])) { try { tomar(new DOMParser().parseFromString(await textoDe(p), "text/html"), p); } catch (e) {} }
+  return [...res.values()]; };
 // ---- atajos con el registro de fuentes del repositorio ----
 window.REPO = "https://raw.githubusercontent.com/erikherrera1624-creator/AUREO-LEYES/main/";
 window.CORRIDA = window.CORRIDA || "";
