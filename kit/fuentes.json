@@ -918,7 +918,12 @@
    "huella": "582f26e32e07c61fde9a9699",
    "unidades": 123,
    "etiqueta": "Guía de llenado del CFDI 4.0 publicada por el SAT",
-   "control": null,
+   "control": {
+    "lm": "Sat, 17 Jan 2026 00:59:49 GMT",
+    "et": "\"{87C908A4-BFC5-4E21-8574-F3819DA95320},4\"",
+    "cl": "1503078",
+    "h": ""
+   },
    "nombre": "Anexo 20, Guía de llenado de los CFDI 4.0"
   },
   {
@@ -1558,7 +1563,12 @@
    "etiqueta": "Texto vigente, última reforma 23/07/2026",
    "nombre": "Constitución Política de la Ciudad de México",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Wed, 26 Aug 2026 19:59:54 GMT",
+    "et": "\"19fa3e-659f8a9bbf76f\"",
+    "cl": "1702462",
+    "h": ""
+   }
   },
   {
    "clave": "est_cdmx_cf",
@@ -1576,7 +1586,12 @@
    "etiqueta": "Texto vigente, última reforma 19/12/2025",
    "nombre": "Código Fiscal de la Ciudad de México",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 22 Jan 2026 16:26:23 GMT",
+    "et": "\"9c4bfae-648fc8066976f\"",
+    "cl": "163889070",
+    "h": ""
+   }
   },
   {
    "clave": "est_cdmx_li",
@@ -1594,7 +1609,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026 (actualizado al 19/12/2025)",
    "nombre": "Ley de Ingresos de la Ciudad de México para el Ejercicio Fiscal 2026",
    "ultima_reg": "Gaceta Oficial 19/12/2025",
-   "control": null
+   "control": {
+    "lm": "Tue, 27 Jan 2026 21:22:30 GMT",
+    "et": "\"6e8f8-649653893d180\"",
+    "cl": "452856",
+    "h": ""
+   }
   },
   {
    "clave": "est_cdmx_cc",
@@ -1612,7 +1632,12 @@
    "etiqueta": "Texto vigente, última reforma 20/08/2026",
    "nombre": "Código Civil para el Distrito Federal",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 28 Sep 2026 23:33:17 GMT",
+    "et": "\"2a97b0-65c937d985e6f\"",
+    "cl": "2791344",
+    "h": ""
+   }
   },
   {
    "clave": "est_chih_cpe",
@@ -1630,7 +1655,12 @@
    "etiqueta": "Texto vigente, última reforma 30/06/2026",
    "nombre": "Constitución Política del Estado de Chihuahua",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 08 Oct 2026 20:29:24 GMT",
+    "et": "\"1d0019-65d5a1663c4b9\"",
+    "cl": "1900569",
+    "h": ""
+   }
   },
   {
    "clave": "est_chih_cf",
@@ -1648,7 +1678,12 @@
    "etiqueta": "Texto vigente, última reforma 24/12/2025",
    "nombre": "Código Fiscal del Estado de Chihuahua",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Fri, 02 Jan 2026 16:51:06 GMT",
+    "et": "\"122223-6476a83f65925\"",
+    "cl": "1188387",
+    "h": ""
+   }
   },
   {
    "clave": "est_chih_lh",
@@ -1666,7 +1701,12 @@
    "etiqueta": "Texto vigente, última reforma 24/12/2025",
    "nombre": "Ley de Hacienda del Estado de Chihuahua",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 03 Mar 2026 18:19:27 GMT",
+    "et": "\"917e9-64c22be6bacbf\"",
+    "cl": "595945",
+    "h": ""
+   }
   },
   {
    "clave": "est_chih_li",
@@ -1684,7 +1724,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026",
    "nombre": "Ley de Ingresos del Estado de Chihuahua para el Ejercicio Fiscal 2026",
    "ultima_reg": "OCR",
-   "control": null
+   "control": {
+    "lm": "Wed, 07 Jan 2026 20:41:39 GMT",
+    "et": "\"1cac3a-647d251b2629b\"",
+    "cl": "1879098",
+    "h": ""
+   }
   },
   {
    "clave": "est_chih_lcf",
@@ -1702,7 +1747,12 @@
    "etiqueta": "Texto vigente, última reforma 24/12/2025",
    "nombre": "Ley de Coordinación Fiscal del Estado de Chihuahua y sus Municipios",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Fri, 02 Jan 2026 16:59:44 GMT",
+    "et": "\"d9299-6476aa2d81620\"",
+    "cl": "889497",
+    "h": ""
+   }
   },
   {
    "clave": "est_chih_cc",
@@ -1720,7 +1770,12 @@
    "etiqueta": "Texto vigente, última reforma 24/08/2024",
    "nombre": "Código Civil del Estado de Chihuahua",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 22 Jun 2026 18:05:56 GMT",
+    "et": "\"2ab14c-654db7e6f817f\"",
+    "cl": "2797900",
+    "h": ""
+   }
   },
   {
    "clave": "est_chis_cpe",
@@ -1738,7 +1793,12 @@
    "etiqueta": "Texto vigente, última reforma 30/09/2026",
    "nombre": "Constitución Política del Estado Libre y Soberano de Chiapas",
    "ultima_reg": "30/09/2026",
-   "control": null
+   "control": {
+    "lm": "Mon, 05 Oct 2026 22:06:34 GMT",
+    "et": "",
+    "cl": "2100533",
+    "h": ""
+   }
   },
   {
    "clave": "est_chis_cf",
@@ -1756,7 +1816,12 @@
    "etiqueta": "Texto vigente, última reforma 10/12/2025",
    "nombre": "Código Fiscal del Estado de Chiapas",
    "ultima_reg": "10/12/2025",
-   "control": null
+   "control": {
+    "lm": "Tue, 16 Dec 2025 20:36:57 GMT",
+    "et": "",
+    "cl": "1931973",
+    "h": ""
+   }
   },
   {
    "clave": "est_chis_li",
@@ -1774,7 +1839,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026 (actualizado al 30/12/2025)",
    "nombre": "Ley de Ingresos para el Estado de Chiapas para el Ejercicio Fiscal 2026",
    "ultima_reg": "30/12/2025",
-   "control": null
+   "control": {
+    "lm": "Mon, 05 Jan 2026 20:18:00 GMT",
+    "et": "",
+    "cl": "402421",
+    "h": ""
+   }
   },
   {
    "clave": "est_chis_lhm",
@@ -1792,7 +1862,12 @@
    "etiqueta": "Texto vigente, última reforma 31/12/2009",
    "nombre": "Ley de Hacienda Municipal (Chiapas)",
    "ultima_reg": "31/12/2009",
-   "control": null
+   "control": {
+    "lm": "Fri, 15 Mar 2019 15:01:29 GMT",
+    "et": "",
+    "cl": "257744",
+    "h": ""
+   }
   },
   {
    "clave": "est_chis_cc",
@@ -1810,7 +1885,12 @@
    "etiqueta": "Texto vigente, última reforma 28/07/2026",
    "nombre": "Código Civil para el Estado de Chiapas",
    "ultima_reg": "28/07/2026",
-   "control": null
+   "control": {
+    "lm": "Wed, 05 Aug 2026 17:22:38 GMT",
+    "et": "",
+    "cl": "2370406",
+    "h": ""
+   }
   },
   {
    "clave": "est_coah_cpe",
@@ -2426,7 +2506,12 @@
    "etiqueta": "Texto vigente, última reforma 04/08/2026",
    "nombre": "Constitución Política para el Estado de Guanajuato",
    "ultima_reg": "04/08/2026",
-   "control": null
+   "control": {
+    "lm": "Wed, 05 Aug 2026 19:26:28 GMT",
+    "et": "\"da45ce13cdf5a618729d6ce0e73aeecc\"",
+    "cl": "1282341",
+    "h": ""
+   }
   },
   {
    "clave": "est_gto_cf",
@@ -2444,7 +2529,12 @@
    "etiqueta": "Texto vigente, última reforma 31/12/2025",
    "nombre": "Código Fiscal para el Estado de Guanajuato",
    "ultima_reg": "31/12/2025",
-   "control": null
+   "control": {
+    "lm": "Fri, 16 Jan 2026 21:46:37 GMT",
+    "et": "\"e32776cb460b0d69c4f9749b794a199b\"",
+    "cl": "1725214",
+    "h": ""
+   }
   },
   {
    "clave": "est_gto_lh",
@@ -2462,7 +2552,12 @@
    "etiqueta": "Texto vigente, última reforma 31/12/2025",
    "nombre": "Ley de Hacienda para el Estado de Guanajuato",
    "ultima_reg": "31/12/2025",
-   "control": null
+   "control": {
+    "lm": "Tue, 23 Jun 2026 23:49:33 GMT",
+    "et": "\"1ef4b327e1fbc975def595ca10bc5919\"",
+    "cl": "969770",
+    "h": ""
+   }
   },
   {
    "clave": "est_gto_li",
@@ -2480,7 +2575,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026 (actualizado al 30/12/2025)",
    "nombre": "Ley de Ingresos del Estado de Guanajuato para el Ejercicio Fiscal de 2026",
    "ultima_reg": "30/12/2025",
-   "control": null
+   "control": {
+    "lm": "Fri, 09 Jan 2026 18:00:30 GMT",
+    "et": "\"e3b262e21e7f9ee56db0dafc3dd24b58\"",
+    "cl": "1710201",
+    "h": ""
+   }
   },
   {
    "clave": "est_gto_lcf",
@@ -2498,7 +2598,12 @@
    "etiqueta": "Texto vigente, última reforma 18/12/2025",
    "nombre": "Ley de Coordinación Fiscal del Estado de Guanajuato",
    "ultima_reg": "18/12/2025",
-   "control": null
+   "control": {
+    "lm": "Mon, 12 Jan 2026 19:32:44 GMT",
+    "et": "\"567bf4d9ed60385425067fe03109bdd7\"",
+    "cl": "669680",
+    "h": ""
+   }
   },
   {
    "clave": "est_gto_cc",
@@ -2516,7 +2621,12 @@
    "etiqueta": "Texto vigente, última reforma 18/12/2025",
    "nombre": "Código Civil para el Estado de Guanajuato",
    "ultima_reg": "18/12/2025",
-   "control": null
+   "control": {
+    "lm": "Mon, 12 Jan 2026 18:15:24 GMT",
+    "et": "\"f56418fb632ae2f993a7ad2310ba409b\"",
+    "cl": "3109994",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_cpe",
@@ -2534,7 +2644,12 @@
    "etiqueta": "Texto vigente, última reforma 08/07/2026",
    "nombre": "Constitución Política del Estado de Hidalgo",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 03 Aug 2026 18:21:22 GMT",
+    "et": "\"fc30d-658289af65492\"",
+    "cl": "1032973",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_cf",
@@ -2552,7 +2667,12 @@
    "etiqueta": "Texto vigente, última reforma 31/12/2025",
    "nombre": "Código Fiscal del Estado de Hidalgo",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 19 Feb 2026 16:37:10 GMT",
+    "et": "\"e228b-64b2fea8696c2\"",
+    "cl": "926347",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_lh",
@@ -2570,7 +2690,12 @@
    "etiqueta": "Texto vigente, última reforma 31/12/2025",
    "nombre": "Ley de Hacienda del Estado de Hidalgo",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 09 Feb 2026 18:50:58 GMT",
+    "et": "\"6b2b4-64a689e99700a\"",
+    "cl": "438964",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_li",
@@ -2588,7 +2713,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026",
    "nombre": "Ley de Ingresos del Estado Libre y Soberano de Hidalgo para el Ejercicio Fiscal del Año 2026",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 03 Feb 2026 20:15:27 GMT",
+    "et": "\"75a7a-649f119bb9f70\"",
+    "cl": "481914",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_lhm",
@@ -2606,7 +2736,12 @@
    "etiqueta": "Texto vigente, última reforma 31/12/2025",
    "nombre": "Ley de Hacienda para los Municipios del Estado de Hidalgo",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 09 Feb 2026 18:51:18 GMT",
+    "et": "\"7cd53-64a689fd10b94\"",
+    "cl": "511315",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_lcf",
@@ -2624,7 +2759,12 @@
    "etiqueta": "Texto vigente, última reforma 07/01/2026",
    "nombre": "Ley de Coordinación Fiscal para el Estado de Hidalgo",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 09 Feb 2026 18:50:19 GMT",
+    "et": "\"639a0-64a689c460e63\"",
+    "cl": "407968",
+    "h": ""
+   }
   },
   {
    "clave": "est_hgo_cc",
@@ -2642,7 +2782,12 @@
    "etiqueta": "Texto vigente, última reforma 22/08/2025",
    "nombre": "Código Civil para el Estado de Hidalgo",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Fri, 19 Sep 2025 19:56:09 GMT",
+    "et": "\"1b9c05-63f2cdc6a2b8d\"",
+    "cl": "1809413",
+    "h": ""
+   }
   },
   {
    "clave": "est_jal_cpe",
@@ -2821,7 +2966,12 @@
    "etiqueta": "Texto vigente, última reforma 25/09/2026",
    "nombre": "Constitución Política del Estado Libre y Soberano de México",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 28 Sep 2026 17:17:27 GMT",
+    "et": "\"105d5d-65c8e3d84a3e1\"",
+    "cl": "1072477",
+    "h": ""
+   }
   },
   {
    "clave": "est_mex_cf",
@@ -2839,7 +2989,12 @@
    "etiqueta": "Texto vigente, última reforma 01/10/2026",
    "nombre": "Código Financiero del Estado de México y Municipios",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Fri, 02 Oct 2026 18:40:25 GMT",
+    "et": "\"3b4d7c-65cdfdd96c567\"",
+    "cl": "3886460",
+    "h": "c64741f00243049569bd4a5c"
+   }
   },
   {
    "clave": "est_mex_li",
@@ -2857,7 +3012,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026",
    "nombre": "Ley de Ingresos del Estado de México para el Ejercicio Fiscal 2026",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 18 Dec 2025 18:53:31 GMT",
+    "et": "\"a2873-6463e7a293e70\"",
+    "cl": "665715",
+    "h": "b64ddce5cf797be61d02133f"
+   }
   },
   {
    "clave": "est_mex_lhm",
@@ -2875,7 +3035,12 @@
    "etiqueta": "Texto vigente (compilación del estado)",
    "nombre": "Ley de Ingresos de los Municipios del Estado de México para el Ejercicio Fiscal 2026",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 18 Dec 2025 19:46:58 GMT",
+    "et": "\"59b4d-6463f394f4c75\"",
+    "cl": "367437",
+    "h": "58ba991673f79014345b5d85"
+   }
   },
   {
    "clave": "est_mex_cc",
@@ -2893,7 +3058,12 @@
    "etiqueta": "Texto vigente, última reforma 16/06/2026",
    "nombre": "Código Civil del Estado de México",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 16 Jun 2026 21:09:23 GMT",
+    "et": "\"27c292-654655b73c661\"",
+    "cl": "2605714",
+    "h": "460bb561998d964a562f01ef"
+   }
   },
   {
    "clave": "est_mich_cf",
@@ -2911,7 +3081,12 @@
    "etiqueta": "Texto vigente, última reforma 22/12/2022",
    "nombre": "Código Fiscal del Estado de Michoacán de Ocampo",
    "ultima_reg": "ANTIGUA",
-   "control": null
+   "control": {
+    "lm": "Fri, 14 Apr 2023 02:41:48 GMT",
+    "et": "\"a34bd-5f942c8594c3d\"",
+    "cl": "668861",
+    "h": ""
+   }
   },
   {
    "clave": "est_mich_lh",
@@ -2929,7 +3104,12 @@
    "etiqueta": "Texto vigente, última reforma 22/12/2022",
    "nombre": "Ley de Hacienda del Estado de Michoacán de Ocampo",
    "ultima_reg": "ANTIGUA",
-   "control": null
+   "control": {
+    "lm": "Fri, 14 Apr 2023 00:09:44 GMT",
+    "et": "\"438ff-5f940a891ae0e\"",
+    "cl": "276735",
+    "h": ""
+   }
   },
   {
    "clave": "est_mich_lhm",
@@ -2947,7 +3127,12 @@
    "etiqueta": "Texto vigente, última reforma 22/12/2022",
    "nombre": "Ley de Hacienda Municipal del Estado de Michoacán de Ocampo",
    "ultima_reg": "ANTIGUA",
-   "control": null
+   "control": {
+    "lm": "Fri, 14 Apr 2023 02:52:36 GMT",
+    "et": "\"64b67-5f942ef03e7cc\"",
+    "cl": "412519",
+    "h": ""
+   }
   },
   {
    "clave": "est_mich_lcf",
@@ -2965,7 +3150,12 @@
    "etiqueta": "Texto vigente, última reforma 22/12/2022",
    "nombre": "Ley de Coordinación Fiscal del Estado de Michoacán de Ocampo",
    "ultima_reg": "ANTIGUA",
-   "control": null
+   "control": {
+    "lm": "Fri, 14 Apr 2023 02:45:33 GMT",
+    "et": "\"47325-5f942d5cd30ac\"",
+    "cl": "291621",
+    "h": ""
+   }
   },
   {
    "clave": "est_mich_cc",
@@ -2983,7 +3173,12 @@
    "etiqueta": "Texto vigente, última reforma 26/09/2022",
    "nombre": "Código Civil para el Estado de Michoacán de Ocampo",
    "ultima_reg": "ANTIGUA",
-   "control": null
+   "control": {
+    "lm": "Wed, 12 Oct 2022 14:32:07 GMT",
+    "et": "\"15fb2c-5ead741e20f10\"",
+    "cl": "1440556",
+    "h": ""
+   }
   },
   {
    "clave": "est_mor_cpe",
@@ -3300,7 +3495,12 @@
    "etiqueta": "Texto vigente, última reforma 06/07/2026",
    "nombre": "Constitución Política del Estado Libre y Soberano de Nuevo León",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 07 Jul 2026 19:45:50 GMT",
+    "et": "\"ee7a4-6560aa35d66d0\"",
+    "cl": "976804",
+    "h": ""
+   }
   },
   {
    "clave": "est_nl_cf",
@@ -3318,7 +3518,12 @@
    "etiqueta": "Texto vigente, última reforma 13/01/2023",
    "nombre": "Código Fiscal del Estado de Nuevo León",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 19 Jan 2023 21:10:48 GMT",
+    "et": "\"85222-5f2a45def9cfb\"",
+    "cl": "545314",
+    "h": ""
+   }
   },
   {
    "clave": "est_nl_lh",
@@ -3336,7 +3541,12 @@
    "etiqueta": "Texto vigente, última reforma 25/01/2023",
    "nombre": "Ley de Hacienda del Estado de Nuevo León",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Fri, 27 Jan 2023 22:26:37 GMT",
+    "et": "\"b0900-5f3465bdafc85\"",
+    "cl": "723200",
+    "h": ""
+   }
   },
   {
    "clave": "est_nl_lhm",
@@ -3354,7 +3564,12 @@
    "etiqueta": "Texto vigente, última reforma 25/01/2023",
    "nombre": "Ley de Hacienda para los Municipios del Estado de Nuevo León",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 20 May 2025 18:52:46 GMT",
+    "et": "\"8c4a0-63595c11bc9fa\"",
+    "cl": "574624",
+    "h": ""
+   }
   },
   {
    "clave": "est_nl_lcf",
@@ -3372,7 +3587,12 @@
    "etiqueta": "Texto vigente, última reforma 11/01/2023",
    "nombre": "Ley de Coordinación Hacendaria del Estado de Nuevo León",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Thu, 27 Feb 2025 22:06:05 GMT",
+    "et": "\"4e205-62f26e572f061\"",
+    "cl": "320005",
+    "h": ""
+   }
   },
   {
    "clave": "est_nl_cc",
@@ -3390,7 +3610,12 @@
    "etiqueta": "Texto vigente, última reforma 16/01/2026",
    "nombre": "Código Civil para el Estado de Nuevo León",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Wed, 21 Jan 2026 00:30:23 GMT",
+    "et": "\"18e0f3-648db079dcc89\"",
+    "cl": "1630451",
+    "h": ""
+   }
   },
   {
    "clave": "est_oax_cpe",
@@ -3799,7 +4024,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026 (actualizado al 23/12/2025)",
    "nombre": "Ley de Ingresos del Estado de Querétaro para el Ejercicio Fiscal 2026",
    "ultima_reg": "P.O. La Sombra de Arteaga, 23/12/2025",
-   "control": null
+   "control": {
+    "lm": "Fri, 16 Jan 2026 16:52:18 GMT",
+    "et": "",
+    "cl": "781646",
+    "h": ""
+   }
   },
   {
    "clave": "est_qro_lhm",
@@ -4047,7 +4277,12 @@
    "etiqueta": "Texto vigente, última reforma 09/10/2026",
    "nombre": "Constitución Política del Estado de Sinaloa",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 13 Oct 2026 19:39:06 GMT",
+    "et": "W/\"13abcc-2966615166\"",
+    "cl": "1289164",
+    "h": ""
+   }
   },
   {
    "clave": "est_sin_cf",
@@ -4065,7 +4300,12 @@
    "etiqueta": "Texto vigente, última reforma 25/12/2019",
    "nombre": "Código Fiscal del Estado de Sinaloa",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 24 Feb 2020 22:27:18 GMT",
+    "et": "W/\"86367-651979372\"",
+    "cl": "549735",
+    "h": ""
+   }
   },
   {
    "clave": "est_sin_lh",
@@ -4083,7 +4323,12 @@
    "etiqueta": "Texto vigente, última reforma 17/07/2026",
    "nombre": "Ley de Hacienda del Estado de Sinaloa",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 17 Aug 2026 20:08:13 GMT",
+    "et": "W/\"e65c6-1086873918\"",
+    "cl": "943558",
+    "h": ""
+   }
   },
   {
    "clave": "est_sin_lhm",
@@ -4101,7 +4346,12 @@
    "etiqueta": "Texto vigente, última reforma 17/06/2024",
    "nombre": "Ley de Hacienda Municipal del Estado de Sinaloa",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 17 Aug 2026 20:08:44 GMT",
+    "et": "W/\"a1a07-4035264887\"",
+    "cl": "662023",
+    "h": ""
+   }
   },
   {
    "clave": "est_sin_lcf",
@@ -4119,7 +4369,12 @@
    "etiqueta": "Texto vigente, última reforma 06/06/2025",
    "nombre": "Ley de Coordinación Fiscal del Estado de Sinaloa",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Fri, 06 Jun 2025 23:08:51 GMT",
+    "et": "W/\"c7d34-992827034\"",
+    "cl": "818484",
+    "h": ""
+   }
   },
   {
    "clave": "est_sin_cc",
@@ -4137,7 +4392,12 @@
    "etiqueta": "Texto vigente, última reforma 11/03/2022",
    "nombre": "Código Civil para el Estado de Sinaloa",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Tue, 15 Mar 2022 22:33:49 GMT",
+    "et": "W/\"12a01f-473174880\"",
+    "cl": "1220639",
+    "h": ""
+   }
   },
   {
    "clave": "est_slp_cpe",
@@ -4293,7 +4553,12 @@
    "etiqueta": "Texto vigente, última reforma 28/05/2026",
    "nombre": "Constitución Política del Estado Libre y Soberano de Sonora",
    "ultima_reg": "28/05/2026",
-   "control": null
+   "control": {
+    "lm": "",
+    "et": "",
+    "cl": "976158",
+    "h": "57d2376c2488d08bb24fde7a"
+   }
   },
   {
    "clave": "est_son_cf",
@@ -4311,7 +4576,12 @@
    "etiqueta": "Texto vigente, última reforma 12/12/2025",
    "nombre": "Código Fiscal del Estado de Sonora",
    "ultima_reg": "12/12/2025",
-   "control": null
+   "control": {
+    "lm": "",
+    "et": "",
+    "cl": "974681",
+    "h": "3f43831aa50262a80f6efcae"
+   }
   },
   {
    "clave": "est_son_lh",
@@ -4329,7 +4599,12 @@
    "etiqueta": "Texto vigente (compilación del estado)",
    "nombre": "Ley de Hacienda del Estado de Sonora",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "",
+    "et": "",
+    "cl": "1116088",
+    "h": "fa3561b3a7e0aaf5c2ee50a2"
+   }
   },
   {
    "clave": "est_son_li",
@@ -4347,7 +4622,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026",
    "nombre": "Ley de Ingresos y Presupuesto de Ingresos del Estado de Sonora para el Ejercicio Fiscal 2026",
    "ultima_reg": "DICTAMEN",
-   "control": null
+   "control": {
+    "lm": "",
+    "et": "",
+    "cl": "1195954",
+    "h": "be00bd8dc12e546e244e8ae7"
+   }
   },
   {
    "clave": "est_son_lhm",
@@ -4365,7 +4645,12 @@
    "etiqueta": "Texto vigente (compilación del estado)",
    "nombre": "Ley de Hacienda Municipal del Estado de Sonora",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "",
+    "et": "",
+    "cl": "405585",
+    "h": "ce79364556d1ed1163b22354"
+   }
   },
   {
    "clave": "est_son_cc",
@@ -4383,7 +4668,12 @@
    "etiqueta": "Texto vigente, última reforma 14/05/2021",
    "nombre": "Código Civil para el Estado de Sonora",
    "ultima_reg": "14/05/2021",
-   "control": null
+   "control": {
+    "lm": "",
+    "et": "",
+    "cl": "2142798",
+    "h": "d5e331fffb1dbd572532a936"
+   }
   },
   {
    "clave": "est_tab_cpe",
@@ -4539,7 +4829,12 @@
    "etiqueta": "Texto vigente, última reforma 25/06/2026",
    "nombre": "Constitución Política del Estado de Tamaulipas",
    "ultima_reg": "25/06/2026",
-   "control": null
+   "control": {
+    "lm": "Fri, 26 Jun 2026 23:37:31 GMT",
+    "et": "\"8c4218c2c45dd1:0\"",
+    "cl": "7311480",
+    "h": ""
+   }
   },
   {
    "clave": "est_tamps_cf",
@@ -4557,7 +4852,12 @@
    "etiqueta": "Texto vigente, última reforma 16/12/2025",
    "nombre": "Código Fiscal del Estado de Tamaulipas",
    "ultima_reg": "16/12/2025",
-   "control": null
+   "control": {
+    "lm": "Fri, 03 Jul 2026 17:21:18 GMT",
+    "et": "\"89b9e55b10bdd1:0\"",
+    "cl": "3844922",
+    "h": ""
+   }
   },
   {
    "clave": "est_tamps_lh",
@@ -4575,7 +4875,12 @@
    "etiqueta": "Texto vigente, última reforma 18/08/2026",
    "nombre": "Ley de Hacienda para el Estado de Tamaulipas",
    "ultima_reg": "18/08/2026",
-   "control": null
+   "control": {
+    "lm": "Thu, 20 Aug 2026 19:45:06 GMT",
+    "et": "\"9177766dc30dd1:0\"",
+    "cl": "6127661",
+    "h": ""
+   }
   },
   {
    "clave": "est_tamps_lcf",
@@ -4593,7 +4898,12 @@
    "etiqueta": "Texto vigente, última reforma 24/02/2026",
    "nombre": "Ley de Coordinación Fiscal del Estado de Tamaulipas",
    "ultima_reg": "24/02/2026",
-   "control": null
+   "control": {
+    "lm": "Tue, 23 Jun 2026 19:25:43 GMT",
+    "et": "\"7fb7cc15463dd1:0\"",
+    "cl": "1313667",
+    "h": ""
+   }
   },
   {
    "clave": "est_tamps_cc",
@@ -4611,7 +4921,12 @@
    "etiqueta": "Texto vigente, última reforma 30/03/2026",
    "nombre": "Código Civil para el Estado de Tamaulipas",
    "ultima_reg": "30/03/2026",
-   "control": null
+   "control": {
+    "lm": "Tue, 30 Jun 2026 20:59:10 GMT",
+    "et": "\"aaec2b4cd38dd1:0\"",
+    "cl": "11018697",
+    "h": ""
+   }
   },
   {
    "clave": "est_tlax_cpe",
@@ -4629,7 +4944,12 @@
    "etiqueta": "Texto vigente, última reforma 01/09/2026",
    "nombre": "Constitución Política del Estado Libre y Soberano de Tlaxcala",
    "ultima_reg": "",
-   "control": null
+   "control": {
+    "lm": "Mon, 07 Sep 2026 17:33:05 GMT",
+    "et": "\"6a9ef551-a111f\"",
+    "cl": "659743",
+    "h": ""
+   }
   },
   {
    "clave": "est_tlax_cf",
@@ -4647,7 +4967,12 @@
    "etiqueta": "Texto vigente, última reforma 28/11/2025",
    "nombre": "Código Financiero para el Estado de Tlaxcala y sus Municipios",
    "ultima_reg": "28/11/2025",
-   "control": null
+   "control": {
+    "lm": "Tue, 02 Dec 2025 18:26:43 GMT",
+    "et": "\"692f2f63-144589\"",
+    "cl": "1328521",
+    "h": ""
+   }
   },
   {
    "clave": "est_tlax_li",
@@ -4665,7 +4990,12 @@
    "etiqueta": "Texto vigente para el ejercicio 2026 (actualizado al 01/01/2026)",
    "nombre": "Ley de Ingresos del Estado de Tlaxcala para el Ejercicio Fiscal 2026",
    "ultima_reg": "P.O. 28/11/2025",
-   "control": null
+   "control": {
+    "lm": "Mon, 05 Jan 2026 21:00:40 GMT",
+    "et": "\"695c2678-71d3f\"",
+    "cl": "466239",
+    "h": ""
+   }
   },
   {
    "clave": "est_tlax_cc",
@@ -4683,7 +5013,12 @@
    "etiqueta": "Texto vigente, última reforma 18/06/2024",
    "nombre": "Código Civil para el Estado Libre y Soberano de Tlaxcala",
    "ultima_reg": "18/06/2024",
-   "control": null
+   "control": {
+    "lm": "Fri, 04 Apr 2025 14:49:49 GMT",
+    "et": "\"67eff18d-1aa386\"",
+    "cl": "1745798",
+    "h": ""
+   }
   },
   {
    "clave": "est_ver_cpe",
@@ -4701,7 +5036,12 @@
    "etiqueta": "Texto vigente, última reforma 15/10/2026",
    "nombre": "Constitución Política del Estado de Veracruz de Ignacio de la Llave",
    "ultima_reg": "15/10/2026",
-   "control": null
+   "control": {
+    "lm": "Fri, 16 Oct 2026 19:25:36 GMT",
+    "et": "\"23d53c-65dfa20f8625c-gzip\"",
+    "cl": "",
+    "h": ""
+   }
   },
   {
    "clave": "est_ver_cf",
@@ -4719,7 +5059,12 @@
    "etiqueta": "Texto vigente, última reforma 12/01/2026",
    "nombre": "Código Financiero para el Estado de Veracruz de Ignacio de la Llave",
    "ultima_reg": "12/01/2026",
-   "control": null
+   "control": {
+    "lm": "Wed, 21 Jan 2026 23:50:42 GMT",
+    "et": "\"1b8bbc-648ee9795d893-gzip\"",
+    "cl": "",
+    "h": ""
+   }
   },
   {
    "clave": "est_ver_lh",
@@ -4737,7 +5082,12 @@
    "etiqueta": "Texto vigente, última reforma 09/05/2025",
    "nombre": "Código de Derechos para el Estado de Veracruz de Ignacio de la Llave",
    "ultima_reg": "09/05/2025",
-   "control": null
+   "control": {
+    "lm": "Wed, 14 May 2025 19:02:10 GMT",
+    "et": "\"27aed3-6351d2fa7e112-gzip\"",
+    "cl": "",
+    "h": ""
+   }
   },
   {
    "clave": "est_ver_lhm",
@@ -4755,7 +5105,12 @@
    "etiqueta": "Texto vigente, última reforma 18/09/2026",
    "nombre": "Código Hacendario Municipal para el Estado de Veracruz de Ignacio de la Llave",
    "ultima_reg": "18/09/2026",
-   "control": null
+   "control": {
+    "lm": "Mon, 21 Sep 2026 18:08:04 GMT",
+    "et": "\"198297-65c0221addeb1-gzip\"",
+    "cl": "",
+    "h": ""
+   }
   },
   {
    "clave": "est_ver_lcf",
@@ -4773,7 +5128,12 @@
    "etiqueta": "Texto vigente, última reforma 12/12/2025",
    "nombre": "Ley de Coordinación Fiscal para el Estado y los Municipios de Veracruz de Ignacio de la Llave",
    "ultima_reg": "12/12/2025",
-   "control": null
+   "control": {
+    "lm": "Mon, 15 Dec 2025 18:54:15 GMT",
+    "et": "\"1829a4-6460223384ba1-gzip\"",
+    "cl": "",
+    "h": ""
+   }
   },
   {
    "clave": "est_ver_cc",
@@ -4791,7 +5151,12 @@
    "etiqueta": "Texto vigente, última reforma 08/10/2025",
    "nombre": "Código Civil para el Estado de Veracruz de Ignacio de la Llave",
    "ultima_reg": "08/10/2025",
-   "control": null
+   "control": {
+    "lm": "Tue, 11 Nov 2025 19:18:01 GMT",
+    "et": "\"349c59-6435681a76e3f-gzip\"",
+    "cl": "",
+    "h": ""
+   }
   },
   {
    "clave": "est_yuc_cpe",
@@ -4809,7 +5174,12 @@
    "etiqueta": "Texto vigente, última reforma 04/09/2026",
    "nombre": "Constitución Política del Estado de Yucatán",
    "ultima_reg": "04/09/2026",
-   "control": null
+   "control": {
+    "lm": "Mon, 07 Sep 2026 20:44:58 GMT",
+    "et": "\"28e171-65aeab0fbf6be\"",
+    "cl": "2679153",
+    "h": ""
+   }
   },
   {
    "clave": "est_yuc_cf",
@@ -4827,7 +5197,12 @@
    "etiqueta": "Texto vigente, última reforma 28/12/2023",
    "nombre": "Código Fiscal del Estado de Yucatán",
    "ultima_reg": "28/12/2023",
-   "control": null
+   "control": {
+    "lm": "Wed, 03 Jan 2024 20:30:12 GMT",
+    "et": "\"17434e-60e107b5d1414\"",
+    "cl": "1524558",
+    "h": ""
+   }
   },
   {
    "clave": "est_yuc_lh",
@@ -4845,7 +5220,12 @@
    "etiqueta": "Texto vigente, última reforma 26/12/2025",
    "nombre": "Ley General de Hacienda del Estado de Yucatán",
    "ultima_reg": "26/12/2025",
-   "control": null
+   "control": {
+    "lm": "Wed, 19 Aug 2026 19:56:17 GMT",
+    "et": "\"1c7bb2-6596bcbe1c84e\"",
+    "cl": "1866674",
+    "h": ""
+   }
   },
   {
    "clave": "est_yuc_lhm",
@@ -4863,7 +5243,12 @@
    "etiqueta": "Texto vigente, última reforma 24/06/2020",
    "nombre": "Ley de Hacienda Municipal del Estado de Yucatán",
    "ultima_reg": "24/06/2020",
-   "control": null
+   "control": {
+    "lm": "Thu, 01 Sep 2022 17:47:06 GMT",
+    "et": "\"d22b8-5e7a133b367f6\"",
+    "cl": "860856",
+    "h": ""
+   }
   },
   {
    "clave": "est_yuc_lcf",
@@ -4881,7 +5266,12 @@
    "etiqueta": "Texto vigente, última reforma 28/12/2023",
    "nombre": "Ley de Coordinación Fiscal del Estado de Yucatán",
    "ultima_reg": "28/12/2023",
-   "control": null
+   "control": {
+    "lm": "Wed, 03 Jan 2024 20:31:46 GMT",
+    "et": "\"77a35-60e1080fe5aea\"",
+    "cl": "490037",
+    "h": ""
+   }
   },
   {
    "clave": "est_yuc_cc",
@@ -4899,7 +5289,12 @@
    "etiqueta": "Texto vigente, última reforma 07/06/2022",
    "nombre": "Código Civil del Estado de Yucatán",
    "ultima_reg": "07/06/2022",
-   "control": null
+   "control": {
+    "lm": "Fri, 10 Jun 2022 19:40:23 GMT",
+    "et": "\"26e730-5e11d1bf88f31\"",
+    "cl": "2549552",
+    "h": ""
+   }
   },
   {
    "clave": "est_zac_cpe",
@@ -5078,7 +5473,14 @@
   "https://www.diputados.gob.mx": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
   "https://www.sat.gob.mx": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html",
   "https://www.congreso-hidalgo.gob.mx": "https://www.congreso-hidalgo.gob.mx/biblioteca_legislativa/leyes_cintillo/",
-  "https://www.congresochihuahua2.gob.mx": "https://www.congresochihuahua2.gob.mx/favicon.ico"
+  "https://www.congresochihuahua2.gob.mx": "https://www.congresochihuahua2.gob.mx/favicon.ico",
+  "https://www.congresochiapas.gob.mx": "https://www.congresochiapas.gob.mx/favicon.ico",
+  "https://data.consejeria.cdmx.gob.mx": "https://data.consejeria.cdmx.gob.mx/favicon.ico",
+  "https://www.legisver.gob.mx": "https://www.legisver.gob.mx/favicon.ico",
+  "http://omawww.sat.gob.mx": "http://omawww.sat.gob.mx/tramitesyservicios/Paginas/documentos/",
+  "https://gaceta.congresosinaloa.gob.mx:3001": "https://gaceta.congresosinaloa.gob.mx:3001/favicon.ico",
+  "https://gestion.api.congresoson.gob.mx": "https://gestion.api.congresoson.gob.mx/favicon.ico",
+  "https://servidoresx3.finanzas.cdmx.gob.mx": "https://servidoresx3.finanzas.cdmx.gob.mx/favicon.ico"
  },
  "incrustar": [
   "https://legislacion.edomex.gob.mx"
