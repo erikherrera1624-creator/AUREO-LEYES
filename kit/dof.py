@@ -26,6 +26,7 @@ def leyes_de(t):
 def ruta(f, pre): return f'{K}/tmp/dof/{pre}{f.replace("-", "")}.json'
 modo, fecha = sys.argv[1], sys.argv[2]
 S = json.load(open(ruta(fecha, 'DOF')))
+if isinstance(S.get('notas'), str): S['notas'] = json.loads(S['notas'])
 sel = [n for n in S['notas'] if relevante(n)]
 if modo == 'seleccionar':
     js = 'preparar(await textosDOF(' + json.dumps([{'codigo': n['codigo'], 'url': n['url']} for n in sel], ensure_ascii=False) + '))'

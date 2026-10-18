@@ -4,6 +4,8 @@
 // pdf.js se carga solo cuando hace falta leer un PDF (funciona también en páginas XML, donde no se ejecutan etiquetas <script>)
 window.cargarPdfjs = async () => { if (window.pdfjsLib) return; const base = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
   const code = await (await fetch(base + "pdf.min.js")).text(); (new Function(code)).call(window); pdfjsLib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.js"; };
+// algunos sitios (el DOF usa Prototype.js) alteran JSON.stringify de los arreglos
+if (Array.prototype.toJSON) delete Array.prototype.toJSON;
 window.__B = {}; window.__R = null; window.__P = null;
 window.b64 = u8 => { let b = ""; for (let k = 0; k < u8.length; k += 32768) b += String.fromCharCode.apply(null, u8.subarray(k, k + 32768)); return btoa(b); };
 window.gz = async x => new Uint8Array(await new Response(new Blob([x]).stream().pipeThrough(new CompressionStream("gzip"))).arrayBuffer());
