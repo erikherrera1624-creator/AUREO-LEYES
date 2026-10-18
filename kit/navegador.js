@@ -58,12 +58,12 @@ window.sumarioDOF = async fecha => { const [y, m, d] = fecha.split("-"); const o
       out.push({ edicion: ed, seccion, poder, dependencia: dep, titulo: t, codigo: cod, url: new URL(href, location.origin).href }); } }
   return { fecha, notas: out }; };
 // texto completo de notas del DOF (párrafos)
-window.textosDOF = async notas => { const o = {}; for (const n of notas) { try { const h = await (await fetch(n.url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const c = d.querySelector("#DivDetalleNota") || d.body;
-    c.querySelectorAll("style,script").forEach(e => e.remove());
-    const ps = []; const w = d.createTreeWalker(c, NodeFilter.SHOW_TEXT); let t, ult = null, buf = "";
-    while ((t = w.nextNode())) { const b = t.parentElement.closest("p,div,td,li,h1,h2,h3,h4") || c; if (b !== ult) { if (limpio(buf)) ps.push(limpio(buf)); buf = ""; ult = b; } buf += t.textContent + " "; }
-    if (limpio(buf)) ps.push(limpio(buf));
-    o[n.codigo] = ps.filter(p => !/^En el documento que usted está visualizando/.test(p)); } catch (e) { o[n.codigo] = ["ERROR " + e.message]; } } return o; };
+window.textosDOF = async notas => { const o = {}; for (const n of notas) { try { const h = await (await fetch(n.url)).text();
+    let i = h.indexOf("DivDetalleNota"); i = i < 0 ? 0 : h.indexOf(">", i) + 1; let j = h.indexOf("table_menu_right", i); if (j < 0) j = h.length;
+    let x = h.slice(i, j).replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<\/(p|div|td|tr|li|h\d)>|<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, " ");
+    const ta = document.createElement("textarea"); ta.innerHTML = x; x = ta.value;
+    const ps = x.split("\n").map(limpio).filter(p => p && !/^En el documento que usted está visualizando/.test(p));
+    o[n.codigo] = ps.filter((p, k) => k === 0 || p !== ps[k - 1]); } catch (e) { o[n.codigo] = ["ERROR " + e.message]; } } return o; };
 // enlaces de una página (para descubrir compilaciones nuevas de la RMF, por ejemplo)
 window.enlaces = async (url, patron) => { const h = await (await fetch(url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const re = new RegExp(patron, "i");
   return [...d.querySelectorAll("a")].map(a => ({ t: limpio(a.textContent), u: new URL(a.getAttribute("href") || "", url).href })).filter(x => re.test(x.t + " " + x.u)); };
