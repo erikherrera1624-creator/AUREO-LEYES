@@ -7,11 +7,13 @@ K = os.path.dirname(os.path.abspath(__file__)); os.makedirs(K + '/tmp', exist_ok
 corrida = sys.argv[1]; amb = sys.argv[2] if len(sys.argv) > 2 else 'todo'
 D = json.load(open(K + '/fuentes.json'))
 CARGA = ('window.CORRIDA = "' + corrida + '"; await (new Function("return (async()=>{" + await (await fetch("https://raw.githubusercontent.com/erikherrera1624-creator/AUREO-LEYES/main/kit/navegador.js?t=" + Date.now(), { cache: "no-store" })).text() + "\\n})()"))();\n')
-origenes = {}
+origenes, abrir = {}, {}
 for x in D['fuentes']:
     if amb != 'todo' and x['ambito'] != amb: continue
     origenes[x['origen']] = origenes.get(x['origen'], 0) + 1
-plan = [dict(abrir=o + '/', n=n, js=CARGA + 'await revisarAqui()') for o, n in sorted(origenes.items(), key=lambda t: (-t[1], t[0]))]
+    # página del sitio que abre sin descargar nada (nunca un documento: algunos sitios fuerzan la descarga)
+    abrir[x['origen']] = D.get('abrir', {}).get(x['origen'], x['origen'] + '/')
+plan = [dict(abrir=abrir[o], n=n, js=CARGA + 'await revisarAqui()') for o, n in sorted(origenes.items(), key=lambda t: (-t[1], t[0]))]
 for d in D.get('descubrir', []):
     etq = 'DESC' + ''.join(c for c in d['clave'].upper() if c.isalnum()) + '_' + corrida
     plan.append(dict(abrir=d['pagina'], n=1, js=CARGA + f'preparar(await enlaces({json.dumps(d["pagina"])}, {json.dumps(d["patron"])})); paq("{etq}", 0)'))

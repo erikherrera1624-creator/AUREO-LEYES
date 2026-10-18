@@ -4272,5 +4272,10 @@
     "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/compiladas/Compilado_Primera_Modificacion_a_la-Resolucion_Miscelanea_Fiscal_para_2026.pdf"
    ]
   }
- ]
+ ],
+ "abrir": {
+  "https://congresoweb.congresojal.gob.mx": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/LeyesEstatales.cfm",
+  "https://www.diputados.gob.mx": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
+  "https://www.sat.gob.mx": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/index.html"
+ }
 }

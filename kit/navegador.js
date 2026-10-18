@@ -1,14 +1,15 @@
 /* Áureo Leyes — funciones para el navegador integrado (se pegan con javascript_tool en una pestaña del sitio oficial).
    Ninguna guarda archivos en la computadora: leen el texto y lo regresan al espacio de trabajo en trozos.
    Uso: pegar este archivo completo una vez por pestaña (después de cada navegación) y luego llamar a las funciones. */
-if (!window.pdfjsLib) { await new Promise((ok, mal) => { const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"; s.onload = ok; s.onerror = () => mal(new Error("no carga pdf.js")); (document.head || document.documentElement).appendChild(s); }); }
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+// pdf.js se carga solo cuando hace falta leer un PDF (funciona también en páginas XML, donde no se ejecutan etiquetas <script>)
+window.cargarPdfjs = async () => { if (window.pdfjsLib) return; const base = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  const code = await (await fetch(base + "pdf.min.js")).text(); (new Function(code)).call(window); pdfjsLib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.js"; };
 window.__B = {}; window.__R = null; window.__P = null;
 window.b64 = u8 => { let b = ""; for (let k = 0; k < u8.length; k += 32768) b += String.fromCharCode.apply(null, u8.subarray(k, k + 32768)); return btoa(b); };
 window.gz = async x => new Uint8Array(await new Response(new Blob([x]).stream().pipeThrough(new CompressionStream("gzip"))).arrayBuffer());
 window.limpio = t => (t || "").replace(/\s+/g, " ").trim();
 // texto de un PDF por páginas (misma lectura que usa la aplicación)
-window.paginasPdf = async buf => { const pdf = await pdfjsLib.getDocument({ data: buf, isEvalSupported: false, verbosity: 0 }).promise; const paginas = [];
+window.paginasPdf = async buf => { await cargarPdfjs(); const pdf = await pdfjsLib.getDocument({ data: buf, isEvalSupported: false, verbosity: 0 }).promise; const paginas = [];
   for (let i = 1; i <= pdf.numPages; i++) { const pg = await pdf.getPage(i); const tc = await pg.getTextContent(); let linea = "", lineas = [], yAnt = null;
     for (const it of tc.items) { const y = it.transform ? Math.round(it.transform[5]) : null;
       if (yAnt !== null && y !== null && Math.abs(y - yAnt) > 2 && linea) { lineas.push(linea); linea = ""; }
@@ -30,7 +31,7 @@ window.extraer = async (nombre, url, modo, enc) => { const r = await fetch(url);
 // L = [[nombre, url, modo?, enc?], ...]; se ejecuta en segundo plano: después llamar esperar()
 window.lote = L => { window.__B = {}; window.__R = null; (async () => { const o = []; for (const [n, u, m, e] of L) { try { o.push(await extraer(n, u, m, e)); } catch (er) { o.push(n + " ERROR " + er.message); } }
   window.__P = JSON.stringify(window.__B); window.__R = o.join("\n") + "\nTOTAL " + window.__P.length + " trozos " + Math.ceil(window.__P.length / 300000); })(); return "trabajando"; };
-window.esperar = async () => { for (let k = 0; k < 55 && !window.__R; k++) await new Promise(r => setTimeout(r, 1000)); return window.__R || ("trabajando: " + Object.keys(window.__B).join(",")); };
+window.esperar = async () => { for (let k = 0; k < 30 && !window.__R; k++) await new Promise(r => setTimeout(r, 1000)); return window.__R || ("trabajando: " + Object.keys(window.__B).join(",")); };
 // cualquier objeto → texto para el espacio de trabajo (se reúne con reunir.py ETIQUETA)
 window.preparar = obj => { window.__P = typeof obj === "string" ? obj : JSON.stringify(obj); return "TOTAL " + window.__P.length + " trozos " + Math.ceil(window.__P.length / 300000); };
 window.paq = (e, i) => { const n = Math.ceil(window.__P.length / 300000); const s = window.__P.slice(i * 300000, (i + 1) * 300000); return "<<" + e + "|" + i + "|" + n + ">>" + s + "<<FIN>>" + " ".repeat(Math.max(0, 150000 - s.length)); };
@@ -71,7 +72,7 @@ window.etiquetaAqui = pre => pre + location.host.replace(/[^A-Za-z0-9]/g, "").sl
 window.revisarAqui = async () => { const D = await fuentesRepo(); const L = D.fuentes.filter(x => _host(new URL(x.origen).host) === _host(location.host)).map(x => [x.clave, x.url, x.modo, x.enc || ""]);
   if (!L.length) return "sin fuentes para " + location.host; window.__CAB = null; cabeceras(L).then(o => { window.__CAB = o; }); return await terminarAqui(); };
 // si revisarAqui respondió «trabajando», llamar de nuevo a terminarAqui() (sin volver a cargar la página)
-window.terminarAqui = async () => { for (let k = 0; k < 40 && !window.__CAB; k++) await new Promise(r => setTimeout(r, 1000));
+window.terminarAqui = async () => { for (let k = 0; k < 25 && !window.__CAB; k++) await new Promise(r => setTimeout(r, 1000));
   if (!window.__CAB) return "trabajando: vuelva a llamar await terminarAqui()"; preparar(window.__CAB); return paq(etiquetaAqui("CAB"), 0); };
 // texto completo de las fuentes indicadas (claves) de este sitio; después mandar con paq(etiquetaAqui("TXT"), i)
 window.leerAqui = async claves => { const D = await fuentesRepo(); const L = claves.map(k => D.fuentes.find(x => x.clave === k)).filter(Boolean).map(x => [x.clave, x.url, x.modo, x.enc || ""]);
