@@ -4,6 +4,16 @@ uso: python3 kit/reunir.py ETIQUETA carpeta_salida [--texto]
   - --texto: el contenido es texto JSON libre; escribe carpeta_salida/ETIQUETA.json"""
 import json, glob, os, re, sys, base64, gzip
 etq, salida = sys.argv[1], sys.argv[2]; texto = '--texto' in sys.argv
+if '--patron' in sys.argv:   # reúne todas las etiquetas que cumplan el patrón (p. ej. "^CAB.*_20261018-0810$")
+    import subprocess
+    pat = re.compile(etq); vistas = set()
+    for f in glob.glob('/root/.claude/projects/*/*/tool-results/*') + glob.glob('/root/.claude/projects/*/tool-results/*'):
+        try: t = open(f).read(400)
+        except Exception: continue
+        for m in re.finditer(r'<<([A-Za-z0-9_\-]+)\|\d+\|\d+>>', t):
+            if pat.search(m.group(1)): vistas.add(m.group(1))
+    for e in sorted(vistas): subprocess.run([sys.executable, __file__, e, salida] + (['--texto'] if texto else []), check=False)
+    sys.exit()
 tro, total = {}, None
 for f in glob.glob('/root/.claude/projects/*/*/tool-results/*') + glob.glob('/root/.claude/projects/*/tool-results/*'):
     try: crudo = json.load(open(f))

@@ -61,4 +61,16 @@ window.textosDOF = async notas => { const o = {}; for (const n of notas) { try {
 // enlaces de una página (para descubrir compilaciones nuevas de la RMF, por ejemplo)
 window.enlaces = async (url, patron) => { const h = await (await fetch(url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const re = new RegExp(patron, "i");
   return [...d.querySelectorAll("a")].map(a => ({ t: limpio(a.textContent), u: new URL(a.getAttribute("href") || "", url).href })).filter(x => re.test(x.t + " " + x.u)); };
+// ---- atajos con el registro de fuentes del repositorio ----
+window.REPO = "https://raw.githubusercontent.com/erikherrera1624-creator/AUREO-LEYES/main/";
+window.CORRIDA = window.CORRIDA || "";
+const _host = h => h.replace(/^www\./, "");
+window.fuentesRepo = async () => window.__F || (window.__F = await (await fetch(REPO + "kit/fuentes.json?t=" + Date.now(), { cache: "no-store" })).json());
+window.etiquetaAqui = pre => pre + location.host.replace(/[^A-Za-z0-9]/g, "").slice(0, 20).toUpperCase() + "_" + CORRIDA.replace(/[^0-9A-Za-z]/g, "");
+// encabezados de todas las fuentes de este sitio → un trozo listo para reunir.py
+window.revisarAqui = async () => { const D = await fuentesRepo(); const L = D.fuentes.filter(x => _host(new URL(x.origen).host) === _host(location.host)).map(x => [x.clave, x.url, x.modo, x.enc || ""]);
+  if (!L.length) return "sin fuentes para " + location.host; preparar(await cabeceras(L)); return paq(etiquetaAqui("CAB"), 0); };
+// texto completo de las fuentes indicadas (claves) de este sitio; después mandar con paq(etiquetaAqui("TXT"), i)
+window.leerAqui = async claves => { const D = await fuentesRepo(); const L = claves.map(k => D.fuentes.find(x => x.clave === k)).filter(Boolean).map(x => [x.clave, x.url, x.modo, x.enc || ""]);
+  lote(L); const r = await esperar(); return r + "\nETIQUETA " + etiquetaAqui("TXT"); };
 "navegador listo";
