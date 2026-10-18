@@ -3,7 +3,10 @@
    Uso: pegar este archivo completo una vez por pestaña (después de cada navegación) y luego llamar a las funciones. */
 // pdf.js se carga solo cuando hace falta leer un PDF (funciona también en páginas XML, donde no se ejecutan etiquetas <script>)
 window.cargarPdfjs = async () => { if (window.pdfjsLib) return; const base = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
-  const code = await (await fetch(base + "pdf.min.js")).text(); (new Function(code)).call(window); pdfjsLib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.js"; };
+  try { const code = await (await fetch(base + "pdf.min.js")).text(); (new Function(code)).call(window); }
+  catch (e) { // el sitio no permite conexiones a otros dominios: se intenta con etiqueta <script>
+    await new Promise((ok, mal) => { const s = document.createElementNS("http://www.w3.org/1999/xhtml", "script"); s.src = base + "pdf.min.js"; s.onload = ok; s.onerror = () => mal(new Error("no carga pdf.js")); (document.head || document.documentElement).appendChild(s); setTimeout(() => mal(new Error("pdf.js tardó demasiado")), 20000); }); }
+  pdfjsLib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.js"; };
 // algunos sitios (el DOF usa Prototype.js) alteran JSON.stringify de los arreglos
 if (Array.prototype.toJSON) delete Array.prototype.toJSON;
 window.__B = {}; window.__R = null; window.__P = null;
@@ -39,7 +42,7 @@ window.preparar = obj => { window.__P = typeof obj === "string" ? obj : JSON.str
 window.paq = (e, i) => { const n = Math.ceil(window.__P.length / 300000); const s = window.__P.slice(i * 300000, (i + 1) * 300000); return "<<" + e + "|" + i + "|" + n + ">>" + s + "<<FIN>>" + " ".repeat(Math.max(0, 150000 - s.length)); };
 // encabezados de control: fecha de modificación, tamaño y etiqueta; si el sitio no da ninguno, huella del contenido
 window.cabeceras = async L => { const o = {}; let k = 0;
-  const uno = async ([clave, url, modo, enc]) => { try { let r = await fetch(url, { method: "HEAD" }); let lm = r.headers.get("last-modified") || "", et = r.headers.get("etag") || "", cl = r.headers.get("content-length") || "";
+  const uno = async ([clave, url, modo, enc]) => { try { let r; try { r = await fetch(url, { method: "HEAD" }); } catch (e) { r = { ok: false, status: 0, headers: new Headers() }; } let lm = r.headers.get("last-modified") || "", et = r.headers.get("etag") || "", cl = r.headers.get("content-length") || "";
       let h = ""; if (!r.ok || (!lm && !et) || modo === "html") { r = await fetch(url); const b = new Uint8Array(await r.arrayBuffer());
         let datos = b; if (modo === "html") { datos = new TextEncoder().encode(paginasHtml(new TextDecoder(enc || "utf-8").decode(b)).join("\n")); }
         h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", datos))].map(x => x.toString(16).padStart(2, "0")).join("").slice(0, 24); cl = String(b.length); }

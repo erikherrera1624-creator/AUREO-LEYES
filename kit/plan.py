@@ -13,7 +13,13 @@ for x in D['fuentes']:
     origenes[x['origen']] = origenes.get(x['origen'], 0) + 1
     # página del sitio que abre sin descargar nada (nunca un documento: algunos sitios fuerzan la descarga)
     abrir[x['origen']] = D.get('abrir', {}).get(x['origen'], x['origen'] + '/')
-plan = [dict(abrir=abrir[o], n=n, js=CARGA + 'await revisarAqui()') for o, n in sorted(origenes.items(), key=lambda t: (-t[1], t[0]))]
+# sitios cuya política de seguridad no deja leer el kit desde GitHub: se incrusta el kit completo en la instrucción
+NAV = open(K + '/navegador.js').read()
+def INCR(o):
+    F = [{k: x[k] for k in ('clave', 'url', 'modo', 'enc', 'origen') if k in x} for x in D['fuentes'] if x['origen'] == o]
+    return 'window.CORRIDA = "' + corrida + '"; window.__F = ' + json.dumps({'fuentes': F}, ensure_ascii=False) + '; await (async () => {\n' + NAV + '\n})();\n'
+carga = lambda o: INCR(o) if o in D.get('incrustar', []) else CARGA
+plan = [dict(abrir=abrir[o], n=n, js=carga(o) + 'await revisarAqui()') for o, n in sorted(origenes.items(), key=lambda t: (-t[1], t[0]))]
 for d in D.get('descubrir', []):
     etq = 'DESC' + ''.join(c for c in d['clave'].upper() if c.isalnum()) + '_' + corrida
     plan.append(dict(abrir=d['pagina'], n=1, js=CARGA + f'preparar(await enlaces({json.dumps(d["pagina"])}, {json.dumps(d["patron"])})); paq("{etq}", 0)'))

@@ -5076,6 +5076,11 @@
  "abrir": {
   "https://congresoweb.congresojal.gob.mx": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/LeyesEstatales.cfm",
   "https://www.diputados.gob.mx": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
-  "https://www.sat.gob.mx": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html"
- }
+  "https://www.sat.gob.mx": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html",
+  "https://www.congreso-hidalgo.gob.mx": "https://www.congreso-hidalgo.gob.mx/biblioteca_legislativa/leyes_cintillo/",
+  "https://www.congresochihuahua2.gob.mx": "https://www.congresochihuahua2.gob.mx/favicon.ico"
+ },
+ "incrustar": [
+  "https://legislacion.edomex.gob.mx"
+ ]
 }
