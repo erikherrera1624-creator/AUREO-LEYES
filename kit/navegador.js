@@ -1,0 +1,64 @@
+/* Áureo Leyes — funciones para el navegador integrado (se pegan con javascript_tool en una pestaña del sitio oficial).
+   Ninguna guarda archivos en la computadora: leen el texto y lo regresan al espacio de trabajo en trozos.
+   Uso: pegar este archivo completo una vez por pestaña (después de cada navegación) y luego llamar a las funciones. */
+if (!window.pdfjsLib) { await new Promise((ok, mal) => { const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"; s.onload = ok; s.onerror = () => mal(new Error("no carga pdf.js")); (document.head || document.documentElement).appendChild(s); }); }
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+window.__B = {}; window.__R = null; window.__P = null;
+window.b64 = u8 => { let b = ""; for (let k = 0; k < u8.length; k += 32768) b += String.fromCharCode.apply(null, u8.subarray(k, k + 32768)); return btoa(b); };
+window.gz = async x => new Uint8Array(await new Response(new Blob([x]).stream().pipeThrough(new CompressionStream("gzip"))).arrayBuffer());
+window.limpio = t => (t || "").replace(/\s+/g, " ").trim();
+// texto de un PDF por páginas (misma lectura que usa la aplicación)
+window.paginasPdf = async buf => { const pdf = await pdfjsLib.getDocument({ data: buf, isEvalSupported: false, verbosity: 0 }).promise; const paginas = [];
+  for (let i = 1; i <= pdf.numPages; i++) { const pg = await pdf.getPage(i); const tc = await pg.getTextContent(); let linea = "", lineas = [], yAnt = null;
+    for (const it of tc.items) { const y = it.transform ? Math.round(it.transform[5]) : null;
+      if (yAnt !== null && y !== null && Math.abs(y - yAnt) > 2 && linea) { lineas.push(linea); linea = ""; }
+      if (it.str) linea += it.str; if (it.hasEOL && linea.trim()) { lineas.push(linea); linea = ""; } if (it.str) yAnt = y; }
+    if (linea) lineas.push(linea); paginas.push(lineas.map(l => l.replace(/\s+/g, " ").trimEnd()).join("\n")); pg.cleanup(); }
+  return paginas; };
+// páginas de un documento HTML (Zacatecas publica sus leyes como página web; enc = "iso-8859-1" o "utf-8")
+window.paginasHtml = (html, raiz) => { const d = new DOMParser().parseFromString(html, "text/html"); const r = raiz ? (d.querySelector(raiz) || d.body) : d.body;
+  r.querySelectorAll("style,script").forEach(e => e.remove());
+  const lineas = [...r.querySelectorAll("p,h1,h2,h3,h4,li,td")].filter(e => !e.querySelector("p,li,td")).map(e => limpio(e.textContent)).filter(Boolean);
+  const pags = []; for (let i = 0; i < lineas.length; i += 45) pags.push(lineas.slice(i, i + 45).join("\n")); return pags; };
+// extrae un documento (pdf | html | crudo) y lo deja listo para mandarse
+window.extraer = async (nombre, url, modo, enc) => { const r = await fetch(url); if (!r.ok) throw new Error("HTTP " + r.status); const buf = new Uint8Array(await r.arrayBuffer());
+  if (modo === "html") { const pags = paginasHtml(new TextDecoder(enc || "utf-8").decode(buf)); const j = JSON.stringify(pags); window.__B[nombre] = b64(await gz(j)); return nombre + " html " + pags.length + " pág, " + j.length + " car"; }
+  if (buf[0] !== 0x25 || buf[1] !== 0x50) { window.__B["RAW_" + nombre] = b64(await gz(buf)); return nombre + " NO-PDF " + buf.length; }
+  const pags = await paginasPdf(buf); const j = JSON.stringify(pags);
+  if (j.length < pags.length * 300) { window.__B["RAW_" + nombre] = b64(await gz(buf)); return nombre + " ESCANEADO " + pags.length + " pág (crudo)"; }
+  window.__B[nombre] = b64(await gz(j)); return nombre + " " + pags.length + " pág, " + j.length + " car | " + pags[0].slice(0, 80).replace(/\n/g, " / "); };
+// L = [[nombre, url, modo?, enc?], ...]; se ejecuta en segundo plano: después llamar esperar()
+window.lote = L => { window.__B = {}; window.__R = null; (async () => { const o = []; for (const [n, u, m, e] of L) { try { o.push(await extraer(n, u, m, e)); } catch (er) { o.push(n + " ERROR " + er.message); } }
+  window.__P = JSON.stringify(window.__B); window.__R = o.join("\n") + "\nTOTAL " + window.__P.length + " trozos " + Math.ceil(window.__P.length / 300000); })(); return "trabajando"; };
+window.esperar = async () => { for (let k = 0; k < 55 && !window.__R; k++) await new Promise(r => setTimeout(r, 1000)); return window.__R || ("trabajando: " + Object.keys(window.__B).join(",")); };
+// cualquier objeto → texto para el espacio de trabajo (se reúne con reunir.py ETIQUETA)
+window.preparar = obj => { window.__P = typeof obj === "string" ? obj : JSON.stringify(obj); return "TOTAL " + window.__P.length + " trozos " + Math.ceil(window.__P.length / 300000); };
+window.paq = (e, i) => { const n = Math.ceil(window.__P.length / 300000); const s = window.__P.slice(i * 300000, (i + 1) * 300000); return "<<" + e + "|" + i + "|" + n + ">>" + s + "<<FIN>>" + " ".repeat(Math.max(0, 150000 - s.length)); };
+// encabezados de control: fecha de modificación, tamaño y etiqueta; si el sitio no da ninguno, huella del contenido
+window.cabeceras = async L => { const o = {}; let k = 0;
+  const uno = async ([clave, url, modo, enc]) => { try { let r = await fetch(url, { method: "HEAD" }); let lm = r.headers.get("last-modified") || "", et = r.headers.get("etag") || "", cl = r.headers.get("content-length") || "";
+      let h = ""; if (!r.ok || (!lm && !et) || modo === "html") { r = await fetch(url); const b = new Uint8Array(await r.arrayBuffer());
+        let datos = b; if (modo === "html") { datos = new TextEncoder().encode(paginasHtml(new TextDecoder(enc || "utf-8").decode(b)).join("\n")); }
+        h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", datos))].map(x => x.toString(16).padStart(2, "0")).join("").slice(0, 24); cl = String(b.length); }
+      o[clave] = { s: r.status, lm, et, cl, h }; } catch (e) { o[clave] = { s: 0, err: e.message.slice(0, 80) }; } };
+  const trab = async () => { while (k < L.length) await uno(L[k++]); }; await Promise.all([trab(), trab(), trab(), trab()]); return o; };
+// sumario del DOF de una fecha (aaaa-mm-dd): ediciones matutina, vespertina y extraordinarias
+window.sumarioDOF = async fecha => { const [y, m, d] = fecha.split("-"); const out = [], vistos = new Set();
+  for (const ed of ["MAT", "VES", "EXT"]) { let h; try { h = await (await fetch(`/index.php?year=${y}&month=${+m}&day=${+d}&edicion=${ed}`)).text(); } catch (e) { continue; }
+    const doc = new DOMParser().parseFromString(h, "text/html"); let seccion = "", poder = "", dep = "";
+    for (const td of doc.querySelectorAll("td")) {
+      if (td.classList.contains("txt_blanco")) { seccion = limpio(td.textContent); continue; }
+      if (td.classList.contains("txt_blanco2")) { poder = limpio(td.textContent); continue; }
+      if (td.classList.contains("subtitle_azul")) { dep = limpio(td.textContent); continue; }
+      if (td.querySelector("td")) continue; const a = td.querySelector('a[href*="nota_detalle"]'); if (!a) continue;
+      const href = a.getAttribute("href"), cod = (href.match(/codigo=(\d+)/) || [])[1], t = limpio(a.textContent); if (!t || !cod || vistos.has(cod)) continue; vistos.add(cod);
+      out.push({ edicion: ed, seccion, poder, dependencia: dep, titulo: t, codigo: cod, url: new URL(href, location.origin).href }); } }
+  return { fecha, notas: out }; };
+// texto completo de notas del DOF (párrafos)
+window.textosDOF = async notas => { const o = {}; for (const n of notas) { try { const h = await (await fetch(n.url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const c = d.querySelector("#DivDetalleNota") || d.body;
+    c.querySelectorAll("style,script").forEach(e => e.remove()); const ps = [...c.querySelectorAll("p,h1,h2,h3,td")].filter(e => !e.querySelector("p,td")).map(e => limpio(e.textContent)).filter(Boolean);
+    o[n.codigo] = ps.length ? ps : limpio(c.textContent).split(/(?<=\.)\s+(?=[A-ZÁÉÍÓÚÑ])/); } catch (e) { o[n.codigo] = ["ERROR " + e.message]; } } return o; };
+// enlaces de una página (para descubrir compilaciones nuevas de la RMF, por ejemplo)
+window.enlaces = async (url, patron) => { const h = await (await fetch(url)).text(); const d = new DOMParser().parseFromString(h, "text/html"); const re = new RegExp(patron, "i");
+  return [...d.querySelectorAll("a")].map(a => ({ t: limpio(a.textContent), u: new URL(a.getAttribute("href") || "", url).href })).filter(x => re.test(x.t + " " + x.u)); };
+"navegador listo";
