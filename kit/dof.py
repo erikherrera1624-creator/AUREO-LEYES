@@ -12,15 +12,15 @@ ABREV = {'cff': 'CFF', 'lisr': 'LISR', 'liva': 'LIVA', 'lieps': 'LIEPS', 'lfd': 
          'lif_2026': 'LIF 2026', 'lfdc': 'LFDC', 'rmf_2026': 'RMF 2026', 'rlisr': 'RLISR', 'rliva': 'RLIVA', 'rcff': 'RCFF', 'rladua': 'RLA', 'rlss_macerf': 'RACERF', 'cpeum': 'CPEUM'}
 def norm(t): return unicodedata.normalize('NFD', t or '').encode('ascii', 'ignore').decode().lower()
 DEP_FISCAL = r'hacienda y credito publico|administracion tributaria|seguro social|fondo nacional de la vivienda|trabajo y prevision social|banco de mexico|estadistica y geografia|procuraduria de la defensa del contribuyente|ahorro para el retiro'
-TEMA = r'fiscal|impuest|tributari|miscelanea|aduan|comercio exterior|arancel|seguro social|infonavit|vivienda para los trabajadores|salari|unidad de medida|indice nacional de precios|recargo|estimulo|cfdi|comprobante|contribu|derecho|retencion|deduc|devoluc|factura|inpc|udis|valor de la unidad|ley federal del trabajo|ahorro para el retiro'
-EXCLUIR = r'tasas? de interes interbancari|^tasa de interes|convocatoria|licitacion|edicto|sentencia|cartel|aviso de deslinde|norma oficial mexicana|resolucion por la que se modifica.*(estatuto|organico)'
+TEMA = r'fiscal(?!ia)|impuest|tributari|miscelanea|aduan|comercio exterior|arancel|seguro social|infonavit|vivienda para los trabajadores|salari|unidad de medida|indice nacional de precios|recargo|estimulo|cfdi|comprobante|contribu|ley federal de derechos|derechos por|pago de derechos|retencion|deduc|devoluc|factura|inpc|udis|valor de la unidad|ley federal del trabajo|ahorro para el retiro'   # «fiscal» sin «fiscalía»; «derecho» era demasiado amplio
+EXCLUIR = r'tasas? de interes interbancari|^tasa de interes|convocatoria|licitacion|edicto|sentencia|cartel|aviso de deslinde|norma oficial mexicana|resolucion por la que se modifica.*(estatuto|organico)|^acuerdo por el que se (destina|desincorpora|retira del servicio)|instituto nacional electoral'
 def relevante(n):
     t, d = norm(n['titulo']), norm(n['dependencia'] + ' ' + n['poder'])
     if re.search(r'^tipo de cambio para solventar|^indice nacional de precios|^valor de la unidad de medida|unidades de inversion', t): return 'indicador'
     if re.search(EXCLUIR, t): return ''
     if re.match(r'(ley de ingresos|presupuesto de egresos de la federacion)', t): return 'nota'
     if re.match(r'(decreto|acuerdo|resolucion|reglas|lineamientos|aviso)', t) and (re.search(DEP_FISCAL, d) or re.search(TEMA, t)): return 'nota'
-    if re.match(r'decreto por el que se (reforma|adiciona|deroga|expide|abroga)', t) and any(re.search(p, t) for p in NOMBRES.values()): return 'nota'
+    if re.match(r'decreto por el que se (reforma|adiciona|deroga|expide|abroga|modifica)', t) and any(re.search(p, t) for p in NOMBRES.values()): return 'nota'
     return ''
 def leyes_de(t):
     n = norm(t); ks = [k for k, p in NOMBRES.items() if re.search(p, n)]
@@ -69,8 +69,12 @@ for n in sel:
             mes = re.search(r'(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\s+de\s+(\d{4})', norm(texto))
             if m: out['indicadores'][f'inpc_{fecha}'] = dict(clave='inpc', nombre='INPC' + (f' de {mes.group(1)} de {mes.group(2)}' if mes else ''), valor=float(m.group(1)), unidad='puntos (base 2a. quincena de julio 2018 = 100)', desde=fecha, fuente=f'INEGI, DOF {fecha}', url=n['url'], verificacion='oficial (DOF)')
         if m: continue
-    ks = leyes_de(n['titulo'] + ' ' + ' '.join(ps[:6]))
-    es_reforma = bool(re.match(r'(decreto por el que se (reforma|adiciona|deroga|expide|abroga))|(.*resolucion de modificaciones a la resolucion miscelanea)|(ley de ingresos de la federacion para)', norm(n['titulo'])))
+    es_reforma = bool(re.match(r'(decreto por el que se (reforma|adiciona|deroga|expide|abroga|modifica))|(.*resolucion de modificaciones a la resolucion miscelanea)|(ley de ingresos de la federacion para)', norm(n['titulo'])))
+    # leyes afectadas: las del título y las que el decreto reforma expresamente, no las que solo cita como fundamento
+    if es_reforma and ps:
+        _p, _s = procesar(['\n'.join(ps)])
+        ks = list(dict.fromkeys(leyes_de(n['titulo']) + [k for x in _s if x[1] == 'ley' or (x[1] == 'articulo' and re.search(r'\bse (reforma|adiciona|deroga|modifica|expide|abroga)', x[2], re.I)) for k in x[3]]))
+    else: ks = leyes_de(n['titulo'])
     resumen = ' '.join(p for p in ps[1:8] if len(p) > 40 and not re.match(r'(Al margen|En el documento que usted)', p))[:420] or n['titulo']
     out['noticias']['dof_' + n['codigo']] = dict(titulo=n['titulo'][:300], fecha=fecha, fuente=f"DOF, {ED.get(n['edicion'], n['edicion'])}", autoridad=titulo_dep(n['dependencia'] or n['poder']),
         tipo='reforma' if es_reforma else 'resolucion' if norm(n['titulo']).startswith(('resolucion', 'reglas')) else 'acuerdo' if norm(n['titulo']).startswith('acuerdo') else 'noticia',
