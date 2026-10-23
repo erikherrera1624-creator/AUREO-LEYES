@@ -1,5 +1,6 @@
 """Funciones compartidas: limpieza de textos estatales, fechas de reforma y última reforma (las mismas con que se armó la aplicación)."""
-import re, unicodedata
+import re, unicodedata, datetime
+ANIO_MAX = datetime.date.today().year + 1   # antes estaba fijo en 2026: las reformas de 2027 no se habrían reconocido
 MAC = 'Û·Ì˙ÈÒÕ∫∞¡…⁄‡ÎÏ¯ËÁ'
 def limpiar(t):
     if sum(t.count(c) for c in 'ÛÌ·') > 20:   # texto MacRoman leído como Latin-1
@@ -19,7 +20,7 @@ MES = dict(ene=1, feb=2, mar=3, abr=4, may=5, jun=6, jul=7, ago=8, sep=9, set=9,
 RM = r'(ene|feb|mar|abr|may|jun|jul|ago|sep|set|oct|nov|dic)[a-zé]*\.?'
 def iso(a, m, d):
     a, m, d = int(a), int(m), int(d)
-    return f'{a:04d}-{m:02d}-{d:02d}' if 1917 <= a <= 2026 and 1 <= m <= 12 and 1 <= d <= 31 else None
+    return f'{a:04d}-{m:02d}-{d:02d}' if 1917 <= a <= ANIO_MAX and 1 <= m <= 12 and 1 <= d <= 31 else None
 def fechas_en(x):
     out = []
     s = x.lower()

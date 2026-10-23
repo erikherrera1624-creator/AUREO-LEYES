@@ -1,5 +1,103 @@
 {
  "generado": "2026-10-18",
+ "dominios": {
+  "https://www.congreso-hidalgo.gob.mx": {
+   "redirige_a": "https://congresohidalgo.gob.mx",
+   "documentos_en": "https://www.congreso-hidalgo.gob.mx",
+   "listado": "https://congresohidalgo.gob.mx/acervo/public/leyes",
+   "verificado": "2026-10-23",
+   "nota": "La portada redirige al dominio nuevo (congresohidalgo.gob.mx) y desde ahí no se pueden leer los PDF del dominio anterior; los PDF siguen en www.congreso-hidalgo.gob.mx (en el nuevo responden 404). Las fuentes se revisan desde una página del dominio anterior que no redirige; el listado oficial está en el dominio nuevo."
+  },
+  "https://www.congresochihuahua2.gob.mx": {
+   "redirige_a": "https://www.congresochihuahua.gob.mx",
+   "documentos_en": "https://www.congresochihuahua2.gob.mx",
+   "listado": "https://www.congresochihuahua.gob.mx/biblioteca/",
+   "verificado": "2026-10-23",
+   "nota": "Las páginas index.php de congresochihuahua2 envían un formulario automático al sitio principal (no es una redirección HTTP). Los PDF responden en congresochihuahua2; los listados oficiales están en www.congresochihuahua.gob.mx (https sin www no abre; se entra por http://www)."
+  }
+ },
+ "oficiales_extra": [
+  "congreso-gto.s3.amazonaws.com"
+ ],
+ "listados": [
+  {
+   "id": "dip_leyes",
+   "ambito": "federal",
+   "estado": "",
+   "pagina": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
+   "nota": "Leyes federales vigentes (incluye la Ley de Ingresos de la Federación de cada ejercicio)"
+  },
+  {
+   "id": "hgo_leyes",
+   "ambito": "estatal",
+   "estado": "hgo",
+   "pagina": "https://congresohidalgo.gob.mx/acervo/public/leyes",
+   "nota": "Acervo legislativo (dominio nuevo); las ligas apuntan a los PDF del dominio anterior"
+  },
+  {
+   "id": "chih_constitucion",
+   "ambito": "estatal",
+   "estado": "chih",
+   "pagina": "https://www.congresochihuahua.gob.mx/biblioteca/constitucion/",
+   "abrir": "http://www.congresochihuahua.gob.mx/biblioteca/"
+  },
+  {
+   "id": "chih_leyes",
+   "ambito": "estatal",
+   "estado": "chih",
+   "pagina": "https://www.congresochihuahua.gob.mx/biblioteca/leyes/",
+   "abrir": "http://www.congresochihuahua.gob.mx/biblioteca/"
+  },
+  {
+   "id": "chih_codigos",
+   "ambito": "estatal",
+   "estado": "chih",
+   "pagina": "https://www.congresochihuahua.gob.mx/biblioteca/codigos/",
+   "abrir": "http://www.congresochihuahua.gob.mx/biblioteca/"
+  },
+  {
+   "id": "chih_ingresos",
+   "ambito": "estatal",
+   "estado": "chih",
+   "pagina": "https://www.congresochihuahua.gob.mx/biblioteca/leyesIngresos/",
+   "abrir": "http://www.congresochihuahua.gob.mx/biblioteca/",
+   "nota": "Muestra el año más reciente; el filtro por año es un formulario POST que no se usa"
+  },
+  {
+   "id": "jal_listado",
+   "ambito": "estatal",
+   "estado": "jal",
+   "pagina": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/busquedasleyes/Listado'2.cfm",
+   "nota": "Listado completo; los archivos llevan la fecha de publicación en el nombre (-ddmmaa) y cambian con cada actualización"
+  }
+ ],
+ "descubrir": [
+  {
+   "clave": "rmf_2026",
+   "pagina": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html",
+   "patron": "Compilado[^/]*Resoluci[oó]n[^/]*Miscel[aá]nea[^/]*Fiscal[^/]*2026",
+   "conocidos": [
+    "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/compiladas/Compilado_Primera_Modificacion_a_la-Resolucion_Miscelanea_Fiscal_para_2026.pdf"
+   ]
+  }
+ ],
+ "abrir": {
+  "https://congresoweb.congresojal.gob.mx": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/LeyesEstatales.cfm",
+  "https://www.diputados.gob.mx": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
+  "https://www.sat.gob.mx": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html",
+  "https://www.congreso-hidalgo.gob.mx": "https://www.congreso-hidalgo.gob.mx/biblioteca_legislativa/leyes_cintillo/",
+  "https://www.congresochihuahua2.gob.mx": "https://www.congresochihuahua2.gob.mx/favicon.ico",
+  "https://www.congresochiapas.gob.mx": "https://www.congresochiapas.gob.mx/favicon.ico",
+  "https://data.consejeria.cdmx.gob.mx": "https://data.consejeria.cdmx.gob.mx/favicon.ico",
+  "https://www.legisver.gob.mx": "https://www.legisver.gob.mx/favicon.ico",
+  "http://omawww.sat.gob.mx": "http://omawww.sat.gob.mx/tramitesyservicios/Paginas/documentos/",
+  "https://gaceta.congresosinaloa.gob.mx:3001": "https://gaceta.congresosinaloa.gob.mx:3001/favicon.ico",
+  "https://gestion.api.congresoson.gob.mx": "https://gestion.api.congresoson.gob.mx/favicon.ico",
+  "https://servidoresx3.finanzas.cdmx.gob.mx": "https://servidoresx3.finanzas.cdmx.gob.mx/favicon.ico"
+ },
+ "incrustar": [
+  "https://legislacion.edomex.gob.mx"
+ ],
  "fuentes": [
   {
    "clave": "cff",
@@ -5457,32 +5555,5 @@
     "h": "d19b3a090bbf75fe0636731a"
    }
   }
- ],
- "descubrir": [
-  {
-   "clave": "rmf_2026",
-   "pagina": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html",
-   "patron": "Compilado[^/]*Resoluci[oó]n[^/]*Miscel[aá]nea[^/]*Fiscal[^/]*2026",
-   "conocidos": [
-    "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/compiladas/Compilado_Primera_Modificacion_a_la-Resolucion_Miscelanea_Fiscal_para_2026.pdf"
-   ]
-  }
- ],
- "abrir": {
-  "https://congresoweb.congresojal.gob.mx": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/LeyesEstatales.cfm",
-  "https://www.diputados.gob.mx": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
-  "https://www.sat.gob.mx": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html",
-  "https://www.congreso-hidalgo.gob.mx": "https://www.congreso-hidalgo.gob.mx/biblioteca_legislativa/leyes_cintillo/",
-  "https://www.congresochihuahua2.gob.mx": "https://www.congresochihuahua2.gob.mx/favicon.ico",
-  "https://www.congresochiapas.gob.mx": "https://www.congresochiapas.gob.mx/favicon.ico",
-  "https://data.consejeria.cdmx.gob.mx": "https://data.consejeria.cdmx.gob.mx/favicon.ico",
-  "https://www.legisver.gob.mx": "https://www.legisver.gob.mx/favicon.ico",
-  "http://omawww.sat.gob.mx": "http://omawww.sat.gob.mx/tramitesyservicios/Paginas/documentos/",
-  "https://gaceta.congresosinaloa.gob.mx:3001": "https://gaceta.congresosinaloa.gob.mx:3001/favicon.ico",
-  "https://gestion.api.congresoson.gob.mx": "https://gestion.api.congresoson.gob.mx/favicon.ico",
-  "https://servidoresx3.finanzas.cdmx.gob.mx": "https://servidoresx3.finanzas.cdmx.gob.mx/favicon.ico"
- },
- "incrustar": [
-  "https://legislacion.edomex.gob.mx"
  ]
 }

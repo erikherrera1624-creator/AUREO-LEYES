@@ -18,15 +18,29 @@ def relevante(n):
     t, d = norm(n['titulo']), norm(n['dependencia'] + ' ' + n['poder'])
     if re.search(r'^tipo de cambio para solventar|^indice nacional de precios|^valor de la unidad de medida|unidades de inversion', t): return 'indicador'
     if re.search(EXCLUIR, t): return ''
+    if re.match(r'(ley de ingresos|presupuesto de egresos de la federacion)', t): return 'nota'
     if re.match(r'(decreto|acuerdo|resolucion|reglas|lineamientos|aviso)', t) and (re.search(DEP_FISCAL, d) or re.search(TEMA, t)): return 'nota'
     if re.match(r'decreto por el que se (reforma|adiciona|deroga|expide|abroga)', t) and any(re.search(p, t) for p in NOMBRES.values()): return 'nota'
     return ''
 def leyes_de(t):
-    n = norm(t); return [k for k, p in NOMBRES.items() if re.search(p, n)]
+    n = norm(t); ks = [k for k, p in NOMBRES.items() if re.search(p, n)]
+    # la Ley de Ingresos y la RMF son de cada ejercicio: se asocian a la clave de su año (lif_2027, rmf_2027), no a la de 2026
+    m = re.search(r'ley de ingresos de la federacion para el ejercicio fiscal (?:de |del )?((?:19|20)\d{2})', n)
+    if m: ks = [('lif_' + m.group(1)) if k == 'lif_2026' else k for k in ks]
+    m = re.search(r'resolucion miscelanea fiscal para (?:el )?((?:19|20)\d{2})', n)
+    if m and 'rmf_' + m.group(1) not in ks: ks = [k for k in ks if k != 'rmf_2026'] + ['rmf_' + m.group(1)]
+    return list(dict.fromkeys(ks))
 import glob as _g
 def ruta(f, pre):
     fs = sorted(_g.glob(f'{K}/tmp/dof/{pre}{f.replace("-", "")}_*.json') + _g.glob(f'{K}/tmp/dof/{pre}{f.replace("-", "")}.json'), key=os.path.getmtime)
     return fs[-1] if fs else f'{K}/tmp/dof/{pre}{f.replace("-", "")}.json'
+if len(sys.argv) > 1 and sys.argv[1] == 'pendientes':   # python3 kit/dof.py pendientes [noche] → fechas por revisar, sin tope de días
+    from datetime import date, datetime, timedelta, timezone
+    I = json.load(open(os.path.dirname(K) + '/indice.json')); hoy = datetime.now(timezone(timedelta(hours=-6))).date()
+    desde = date.fromisoformat(I.get('dof_revisado') or str(hoy)) + timedelta(days=1)
+    fechas = [desde + timedelta(days=i) for i in range((hoy - desde).days + 1)]
+    if len(sys.argv) > 2 and sys.argv[2] == 'noche' and hoy not in fechas: fechas.append(hoy)   # edición vespertina del día
+    print(' '.join(f.isoformat() for f in fechas) or '(al día)'); sys.exit()
 modo, fecha = sys.argv[1], sys.argv[2]; corrida = sys.argv[3] if len(sys.argv) > 3 else ''
 MINUS = {'de', 'del', 'la', 'las', 'los', 'y', 'e', 'para', 'en', 'el', 'a'}
 def titulo_dep(t): return ' '.join(w.lower() if (w.lower() in MINUS and i) else w.capitalize() for i, w in enumerate((t or '').split()))
@@ -56,13 +70,13 @@ for n in sel:
             if m: out['indicadores'][f'inpc_{fecha}'] = dict(clave='inpc', nombre='INPC' + (f' de {mes.group(1)} de {mes.group(2)}' if mes else ''), valor=float(m.group(1)), unidad='puntos (base 2a. quincena de julio 2018 = 100)', desde=fecha, fuente=f'INEGI, DOF {fecha}', url=n['url'], verificacion='oficial (DOF)')
         if m: continue
     ks = leyes_de(n['titulo'] + ' ' + ' '.join(ps[:6]))
-    es_reforma = bool(re.match(r'(decreto por el que se (reforma|adiciona|deroga|expide|abroga))|(.*resolucion de modificaciones a la resolucion miscelanea)', norm(n['titulo'])))
+    es_reforma = bool(re.match(r'(decreto por el que se (reforma|adiciona|deroga|expide|abroga))|(.*resolucion de modificaciones a la resolucion miscelanea)|(ley de ingresos de la federacion para)', norm(n['titulo'])))
     resumen = ' '.join(p for p in ps[1:8] if len(p) > 40 and not re.match(r'(Al margen|En el documento que usted)', p))[:420] or n['titulo']
     out['noticias']['dof_' + n['codigo']] = dict(titulo=n['titulo'][:300], fecha=fecha, fuente=f"DOF, {ED.get(n['edicion'], n['edicion'])}", autoridad=titulo_dep(n['dependencia'] or n['poder']),
         tipo='reforma' if es_reforma else 'resolucion' if norm(n['titulo']).startswith(('resolucion', 'reglas')) else 'acuerdo' if norm(n['titulo']).startswith('acuerdo') else 'noticia',
         tema='fiscal' if re.search(r'hacienda|tributaria|impuest|fiscal|aduan', norm(n['dependencia'] + n['titulo'])) else 'seguridad_social' if re.search(r'seguro social|vivienda|retiro', norm(n['dependencia'] + n['titulo'])) else 'laboral' if re.search(r'trabajo|salari', norm(n['dependencia'] + n['titulo'])) else 'fiscal',
         relevancia=1 if es_reforma else 2, resumen=resumen, relevancia_profesional='Texto publicado en el Diario Oficial; la aplicación lo incorporó en automático. Verifique la entrada en vigor en sus transitorios.' if es_reforma else '',
-        url=n['url'], disposiciones=', '.join(ABREV.get(k, k) for k in ks), oficial=True, destacada=es_reforma, origen='dof_automatico')
+        url=n['url'], disposiciones=', '.join(ABREV.get(k) or k.upper().replace('_', ' ') for k in ks), oficial=True, destacada=es_reforma, origen='dof_automatico')
     if es_reforma and ks and ps:
         did = 'dof_' + n['codigo']; pars, secs = procesar(['\n'.join(ps)])
         cuerpo = json.dumps(dict(id=did, fecha=fecha, titulo=n['titulo'], pdf=n['url'], leyes=ks, p=pars, s=secs), ensure_ascii=False, separators=(',', ':'))
