@@ -85,3 +85,13 @@ Luego commit y push. Nunca aprobar un «documento_diferente».
   familia de archivo y título normalizado; ya no hay que agregarlos a mano.
 - Leyes de ingresos del ejercicio siguiente: se buscan solas desde septiembre (sondeo con el año cambiado y listados).
   Estado en `kit/anuales.json`: pendiente_publicacion, detectada, pendiente_validacion o incorporada.
+
+## Versiones de años anteriores (solo cuando se pida)
+No forma parte de la revisión programada. Para agregar versiones anteriores de una ley:
+1. En una pestaña de `https://web.archive.org/` (el sitio pide permiso en cada acción) definir `window.ENTRADA_HIST` con
+   `[{clave, arch, num, actual, h}]` (`arch`: nombre del archivo en Diputados, p. ej. `LISR`; `num`: número que usaba antes,
+   p. ej. `8` para el CFF; `actual`: fecha de la última reforma de la versión vigente; `h`: huella de cada disposición vigente,
+   ver `fnv`/`canon` en `job.js`) y ejecutar `kit/historicos/job.js`. Avance: `await avance()`.
+2. Al terminar, pedir `trozo(i)` para i = 0…`H.trozos`-1, unir los trozos `<<HIST|i|n>>` en un archivo y ejecutar
+   `python3 kit/historicos/armar.py paquete.b64 carpeta_actuales reformas.json`.
+3. Publicar `historicos/` (la aplicación lo lee de `main`).
