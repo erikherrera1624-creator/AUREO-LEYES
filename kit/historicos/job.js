@@ -33,7 +33,9 @@ function fechaPortada(t) { // «Última Reforma DOF 01-04-2024» o «Nueva Ley p
   if (m && MES[m[2].slice(0, 3).toLowerCase()]) return { f: iso(m[3], MES[m[2].slice(0, 3).toLowerCase()], m[1]), tipo: "original" };
   return null; }
 const fnv = s => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return (h >>> 0).toString(16).padStart(8, "0").slice(0, 6); };
-const canon = u => [u.tipo, u.nn, u.titulo, u.ubicacion, u.texto].map(x => String(x || "").replace(/\s+/g, " ").trim()).join("|");
+// huella exacta (sin normalizar espacios): dos disposiciones solo se consideran iguales si su texto es idéntico, saltos de párrafo incluidos
+const canon = u => [u.tipo, u.nn, u.titulo, u.ubicacion, u.texto].map(x => String(x || "")).join("|");
+const fnv8 = s => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return (h >>> 0).toString(16).padStart(8, "0"); };
 function claves(us) { const c = {}; return us.map(u => { const n = c[u.nn] || 0; c[u.nn] = n + 1; return u.nn + "#" + n; }); }
 function delta(us, ref) {
   const ks = claves(us); let rmap = null; if (ref.units) { rmap = {}; claves(ref.units).forEach((k, i) => rmap[k] = ref.units[i]); }
@@ -74,7 +76,7 @@ async function ley(E) {
       const doc = LECTOR.documento(pags, "articulos"); const fm = (doc.meta || {}).fecha_ultima_reforma || c.f;
       if (listos.has(fm)) { R.err.push(c.f + ": repetida (" + fm + ")"); continue; } listos.add(fm);
       const us = doc.unidades; const d = delta(us, ref);
-      R.versiones.push({ f: fm, fPortada: c.f, tipo: c.tipo, meta: doc.meta, archivo: c.o, ts: c.ts, paginas: pags.length, num: us.length, cambios: d.filter(x => !Array.isArray(x)).length, u: d });
+      R.versiones.push({ f: fm, fPortada: c.f, tipo: c.tipo, meta: doc.meta, archivo: c.o, ts: c.ts, paginas: pags.length, num: us.length, cambios: d.filter(x => !Array.isArray(x)).length, chk: fnv8(us.map(canon).join("\n")), u: d });
       ref = { units: us }; log(E.clave + " " + fm + ": " + us.length + " disposiciones, " + R.versiones[R.versiones.length - 1].cambios + " distintas");
     } catch (e) { R.err.push(c.f + ": " + String(e.message || e).slice(0, 100)); log(E.clave + " " + c.f + " ERROR " + e.message); }
     await espera(1500); }
