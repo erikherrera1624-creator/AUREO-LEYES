@@ -1,10 +1,10 @@
 {
- "generado": "2026-10-23",
+ "generado": "2026-10-24",
  "fuente": "Compilaciones de la Cámara de Diputados conservadas por Internet Archive (web.archive.org)",
  "leyes": {
   "lisr": {
    "archivo": "lisr.json",
-   "v": "a3f343e43e8c",
+   "v": "32f4cd578b53",
    "bytes": 2039729,
    "versiones": [
     {
@@ -82,45 +82,103 @@
     "2021-07-31"
    ]
   },
-  "cff": {
-   "archivo": "cff.json",
-   "v": "a76565cbfd85",
-   "bytes": 1032066,
+  "liva": {
+   "archivo": "liva.json",
+   "v": "7e6e91d59825",
+   "bytes": 774215,
    "versiones": [
     {
-     "id": "hist_cff_2021-11-12",
-     "etiqueta": "Texto del 12/11/2021 al 15/10/2025 (última reforma DOF 12/11/2021)",
-     "fecha_reforma": "2021-11-12",
-     "desde": "2021-11-12",
-     "hasta": "2025-10-16",
+     "id": "hist_liva_2006-07-18",
+     "etiqueta": "Texto del 18/07/2006 al 30/09/2007 (última reforma DOF 18/07/2006)",
+     "fecha_reforma": "2006-07-18",
+     "desde": "2006-07-18",
+     "hasta": "2007-10-01",
      "historico": true,
-     "num": 449,
-     "capturado": "2025-04-04"
+     "num": 81,
+     "capturado": "2006-08-13"
     },
     {
-     "id": "hist_cff_2025-10-16",
-     "etiqueta": "Texto del 16/10/2025 al 06/11/2025 (última reforma DOF 16/10/2025)",
-     "fecha_reforma": "2025-10-16",
-     "desde": "2025-10-16",
-     "hasta": "2025-11-07",
+     "id": "hist_liva_2007-10-01",
+     "etiqueta": "Texto del 01/10/2007 al 06/12/2009 (última reforma DOF 01/10/2007)",
+     "fecha_reforma": "2007-10-01",
+     "desde": "2007-10-01",
+     "hasta": "2009-12-07",
      "historico": true,
-     "num": 450,
-     "capturado": "2025-10-18"
+     "num": 82,
+     "capturado": "2007-11-22"
     },
     {
-     "id": "hist_cff_2025-11-14",
-     "etiqueta": "Texto del 14/11/2025 al 08/04/2026 (última reforma DOF 14/11/2025)",
-     "fecha_reforma": "2025-11-14",
-     "desde": "2025-11-14",
-     "hasta": "2026-04-09",
+     "id": "hist_liva_2009-12-07",
+     "etiqueta": "Texto del 07/12/2009 al 10/12/2013 (última reforma DOF 07/12/2009)",
+     "fecha_reforma": "2009-12-07",
+     "desde": "2009-12-07",
+     "hasta": "2013-12-11",
      "historico": true,
-     "num": 456,
-     "capturado": "2026-01-30"
+     "num": 83,
+     "capturado": "2013-05-15"
+    },
+    {
+     "id": "hist_liva_2013-12-11",
+     "etiqueta": "Texto del 11/12/2013 al 29/11/2016 (última reforma DOF 11/12/2013)",
+     "fecha_reforma": "2013-12-11",
+     "desde": "2013-12-11",
+     "hasta": "2016-11-30",
+     "historico": true,
+     "num": 86,
+     "capturado": "2016-02-22"
+    },
+    {
+     "id": "hist_liva_2016-11-30",
+     "etiqueta": "Texto del 30/11/2016 al 08/12/2019 (última reforma DOF 30/11/2016)",
+     "fecha_reforma": "2016-11-30",
+     "desde": "2016-11-30",
+     "hasta": "2019-12-09",
+     "historico": true,
+     "num": 87,
+     "capturado": "2019-02-12"
+    },
+    {
+     "id": "hist_liva_2019-12-09",
+     "etiqueta": "Texto del 09/12/2019 al 07/12/2020 (última reforma DOF 09/12/2019)",
+     "fecha_reforma": "2019-12-09",
+     "desde": "2019-12-09",
+     "hasta": "2020-12-08",
+     "historico": true,
+     "num": 101,
+     "capturado": "2020-01-10"
+    },
+    {
+     "id": "hist_liva_2020-12-08",
+     "etiqueta": "Texto del 08/12/2020 al 22/04/2021 (última reforma DOF 08/12/2020)",
+     "fecha_reforma": "2020-12-08",
+     "desde": "2020-12-08",
+     "hasta": "2021-04-23",
+     "historico": true,
+     "num": 104,
+     "capturado": "2021-04-22"
+    },
+    {
+     "id": "hist_liva_2021-04-23",
+     "etiqueta": "Texto del 23/04/2021 al 30/07/2021 (última reforma DOF 23/04/2021)",
+     "fecha_reforma": "2021-04-23",
+     "desde": "2021-04-23",
+     "hasta": "2021-07-31",
+     "historico": true,
+     "num": 105,
+     "capturado": "2021-07-05"
+    },
+    {
+     "id": "hist_liva_2021-07-31",
+     "etiqueta": "Texto del 31/07/2021 al 11/11/2021 (última reforma DOF 31/07/2021)",
+     "fecha_reforma": "2021-07-31",
+     "desde": "2021-07-31",
+     "hasta": "2021-11-12",
+     "historico": true,
+     "num": 106,
+     "capturado": "2021-12-08"
     }
    ],
-   "sin_copia": [
-    "2025-11-07"
-   ]
+   "sin_copia": []
   }
  }
 }
