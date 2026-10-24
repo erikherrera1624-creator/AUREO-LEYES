@@ -7,7 +7,15 @@ Al abrirse con internet, la aplicación (archivo `Aureo_Investigacion.html`, con
    decretos de reforma e indicadores (tipo de cambio, UDI, TIIE, INPC) de todos los días pendientes; el día de hoy se vuelve a
    revisar en cada apertura y cada 30 minutos mientras siga abierta;
 2. consulta `indice.json` de este repositorio y aplica las actualizaciones que aún no tiene (textos vigentes nuevos de las leyes).
-No hay que descargar nada. Sin internet, usa lo guardado y lo indica en el encabezado.
+No hay que descargar nada. Sin internet, usa lo guardado y lo indica en el encabezado. El sumario completo de cada día revisado
+queda guardado en el equipo (pestaña «DOF» y asistente).
+
+**El asistente también usa el Diario Oficial como fuente**: responde qué se publicó un día, una semana o un mes (por dependencia,
+tipo de publicación o tema), busca en lo publicado y guardado, y da los indicadores (tipo de cambio con el artículo 20 del CFF,
+UDI, TIIE, INPC e inflación, CPP, CCP, UMA, salarios mínimos y la UMI con su aviso de que no es la UMA). Cada cita lleva título,
+fecha, edición, dependencia, página y liga oficial (`dof.gob.mx`). El DOF es fuente federal: con «Solo un estado» no se usa sin
+autorización del usuario. Si un día o una publicación no está guardado, se pide al SIDOF solo la fecha o el número de la
+publicación; **ninguna consulta del usuario sale del equipo**.
 
 - `indice.json`: lista de actualizaciones publicadas.
 - `actualizaciones/`: cada actualización (textos divididos en artículos, decretos, noticias).
