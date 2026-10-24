@@ -10,7 +10,9 @@ async function pedir(url, opts, n) { n = n || 4; let e; for (let i = 0; i < n; i
   try { const c = new AbortController(); const t = setTimeout(() => c.abort(), 180000); const r = await fetch(url, Object.assign({ signal: c.signal }, opts || {})); clearTimeout(t);
     if (r.status === 429 || r.status >= 500) { e = new Error("HTTP " + r.status); continue; } return r; } catch (x) { e = x; } } throw e; }
 async function cargar() {
-  if (!window.pdfjsLib) { const base = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/"; const code = await (await fetch(base + "pdf.min.js")).text(); (new Function(code)).call(window); pdfjsLib.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.js"; }
+  if (!window.pdfjsLib) { const base = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/"; const code = await (await fetch(base + "pdf.min.js")).text(); (new Function(code)).call(window); }
+  if (!window.__WORKER) { const w = await (await fetch("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js")).text(); window.__WORKER = URL.createObjectURL(new Blob([w], { type: "text/javascript" })); }
+  pdfjsLib.GlobalWorkerOptions.workerSrc = window.__WORKER;
   if (!window.LECTOR) { const code = await (await fetch("https://raw.githubusercontent.com/erikherrera1624-creator/AUREO-LEYES/main/kit/lector.js?t=" + Date.now())).text(); const module = {}; (new Function("module", code))(module); window.LECTOR = module.exports; }
 }
 // misma lectura de páginas que el kit (navegador.js → paginasPdf)
