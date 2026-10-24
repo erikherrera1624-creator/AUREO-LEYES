@@ -41,10 +41,15 @@ function delta(us, ref) {
     if (ru) { const idx = new Map(); String(ru.texto || "").split("\n\n").forEach((p, j) => { if (!idx.has(p)) idx.set(p, j); }); ops = ps.map(p => idx.has(p) ? idx.get(p) : p); }
     return { k, f: { tipo: u.tipo, numero: u.numero, nn: u.nn, titulo: u.titulo, ubicacion: u.ubicacion, fechas: u.fechas, pagina: u.pagina, orden: u.orden }, p: ops }; }); }
 async function cdx(q) { const r = await pedir("/cdx/search/cdx?" + q + "&fl=original,timestamp,length,digest,mimetype&collapse=digest&filter=statuscode:200&output=json"); const j = await r.json(); return j.slice(1); }
-async function portada(ts, original) { // solo las primeras páginas, con pedidos parciales cuando el servidor los acepta
+async function portada(ts, original) { // solo las primeras páginas (pedidos parciales cuando el servidor los acepta); fecha con el mismo lector del kit
   const pdf = await pdfjsLib.getDocument({ url: `/web/${ts}id_/${original}`, disableAutoFetch: true, disableStream: true, rangeChunkSize: 131072, isEvalSupported: false, verbosity: 0 }).promise;
-  let t = ""; for (let i = 1; i <= Math.min(2, pdf.numPages); i++) { const pg = await pdf.getPage(i); t += (await pg.getTextContent()).items.map(x => x.str).join(" ") + "\n"; }
-  const n = pdf.numPages; await pdf.destroy(); return { t, n }; }
+  const pags = []; for (let i = 1; i <= Math.min(3, pdf.numPages); i++) { const pg = await pdf.getPage(i); const tc = await pg.getTextContent(); let linea = "", lineas = [], yAnt = null;
+    for (const it of tc.items) { const y = it.transform ? Math.round(it.transform[5]) : null; if (yAnt !== null && y !== null && Math.abs(y - yAnt) > 2 && linea) { lineas.push(linea); linea = ""; }
+      if (it.str) linea += it.str; if (it.hasEOL && linea.trim()) { lineas.push(linea); linea = ""; } if (it.str) yAnt = y; }
+    if (linea) lineas.push(linea); pags.push(lineas.map(l => l.replace(/\s+/g, " ").trimEnd()).join("\n")); }
+  const n = pdf.numPages; await pdf.destroy();
+  let meta = {}; try { meta = LECTOR.documento(pags, "articulos").meta || {}; } catch (e) {}
+  return { t: pags.join("\n"), n, f: meta.fecha_ultima_reforma || null }; }
 async function ley(E) {
   const R = { clave: E.clave, versiones: [], err: [], candidatos: [] }; H.res[E.clave] = R; H.estado = E.clave + ": buscando copias";
   let filas = [];
@@ -53,10 +58,10 @@ async function ley(E) {
   const vistos = new Set(); const cand = [];
   for (const [o, ts, len, dg] of filas) { if (vistos.has(dg)) continue; vistos.add(dg);
     const md = /_(\d{2})(\d{2})(\d{2,4})\.pdf$/i.exec(o); cand.push({ o, ts, len: +len, dg, fNombre: md ? iso(md[3], md[2], md[1]) : null }); }
-  for (const c of cand) { H.estado = E.clave + ": portada " + c.ts; try { const p = await portada(c.ts, c.o); const f = fechaPortada(p.t); c.f = f ? f.f : c.fNombre; c.tipo = f ? f.tipo : "reforma"; c.n = p.n; } catch (e) { c.err = String(e.message || e).slice(0, 80); c.f = c.fNombre; } await espera(800); }
+  for (const c of cand) { H.estado = E.clave + ": portada " + c.ts; try { const p = await portada(c.ts, c.o); if (p.f) { c.f = p.f; c.tipo = "reforma"; } else { const f = fechaPortada(p.t); c.f = f ? f.f : c.fNombre; c.tipo = f ? f.tipo : "reforma"; } c.n = p.n; } catch (e) { c.err = String(e.message || e).slice(0, 80); c.f = c.fNombre; } await espera(800); }
   R.candidatos = cand.map(c => [c.o.split("/").pop(), c.ts, c.len, c.f, c.tipo, c.n, c.err || ""]);
   // una copia por fecha de reforma (la más reciente de cada una), sin la versión que ya tiene la aplicación
-  const porF = {}; cand.filter(c => c.f && c.f < E.actual).forEach(c => { if (!porF[c.f] || c.ts > porF[c.f].ts) porF[c.f] = c; });
+  const porF = {}; cand.filter(c => c.f && !c.err && c.n && c.f < E.actual).forEach(c => { if (!porF[c.f] || c.ts > porF[c.f].ts) porF[c.f] = c; });
   const elegidos = Object.values(porF).sort((a, b) => b.f.localeCompare(a.f));
   let ref = { h: E.h }; const listos = new Set();
   for (const c of elegidos) { H.estado = E.clave + ": leyendo " + c.f;
