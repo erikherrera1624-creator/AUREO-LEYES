@@ -6,7 +6,8 @@ const H = window.H; if (H.corriendo) return; H.corriendo = true;
 const ENTRADA = window.ENTRADA_HIST;
 const log = m => { H.log.push(new Date().toISOString().slice(11, 19) + " " + m); if (H.log.length > 300) H.log.shift(); };
 const espera = ms => new Promise(r => setTimeout(r, ms));
-async function pedir(url, opts, n) { n = n || 4; let e; for (let i = 0; i < n; i++) { if (i) await espera(4000 * i * i);
+const conTiempo = (p, ms, que) => Promise.race([p, new Promise((_, mal) => setTimeout(() => mal(new Error("tiempo agotado: " + que)), ms))]);
+async function pedir(url, opts, n) { n = n || 6; let e; for (let i = 0; i < n; i++) { if (i) await espera(4000 * i * i);
   try { const c = new AbortController(); const t = setTimeout(() => c.abort(), 180000); const r = await fetch(url, Object.assign({ signal: c.signal }, opts || {})); clearTimeout(t);
     if (r.status === 429 || r.status >= 500) { e = new Error("HTTP " + r.status); continue; } return r; } catch (x) { e = x; } } throw e; }
 async function cargar() {
@@ -63,22 +64,22 @@ async function ley(E) {
   const vistos = new Set(); const cand = [];
   for (const [o, ts, len, dg] of filas) { if (vistos.has(dg)) continue; vistos.add(dg);
     const md = /_(\d{2})(\d{2})(\d{2,4})\.pdf$/i.exec(o); cand.push({ o, ts, len: +len, dg, fNombre: md ? iso(md[3], md[2], md[1]) : null }); }
-  for (const c of cand) { H.estado = E.clave + ": portada " + c.ts; try { const p = await portada(c.ts, c.o); if (p.f) { c.f = p.f; c.tipo = "reforma"; } else { const f = fechaPortada(p.t); c.f = f ? f.f : c.fNombre; c.tipo = f ? f.tipo : "reforma"; } c.n = p.n; } catch (e) { c.err = String(e.message || e).slice(0, 80); c.f = c.fNombre; } await espera(800); }
+  for (const c of cand) { H.estado = E.clave + ": portada " + c.ts; try { const p = await conTiempo(portada(c.ts, c.o), 120000, "portada"); if (p.f) { c.f = p.f; c.tipo = "reforma"; } else { const f = fechaPortada(p.t); c.f = f ? f.f : c.fNombre; c.tipo = f ? f.tipo : "reforma"; } c.n = p.n; } catch (e) { c.err = String(e.message || e).slice(0, 80); c.f = c.fNombre; } await espera(800); }
   R.candidatos = cand.map(c => [c.o.split("/").pop(), c.ts, c.len, c.f, c.tipo, c.n, c.err || ""]);
   // una copia por fecha de reforma (la más reciente de cada una), sin la versión que ya tiene la aplicación
   const porF = {}; cand.filter(c => c.f && !c.err && c.n && c.f < E.actual).forEach(c => { if (!porF[c.f] || c.ts > porF[c.f].ts) porF[c.f] = c; });
   const elegidos = Object.values(porF).sort((a, b) => b.f.localeCompare(a.f));
   let ref = { h: E.h }; const listos = new Set();
   for (const c of elegidos) { H.estado = E.clave + ": leyendo " + c.f;
-    try { const r = await pedir(`/web/${c.ts}id_/${c.o}`); const buf = new Uint8Array(await r.arrayBuffer());
+    try { await conTiempo((async () => { const r = await pedir(`/web/${c.ts}id_/${c.o}`); const buf = new Uint8Array(await r.arrayBuffer());
       if (buf[0] !== 0x25 || buf[1] !== 0x50) throw new Error("no es PDF");
       const pdf = await pdfjsLib.getDocument({ data: buf, isEvalSupported: false, verbosity: 0 }).promise; const pags = await paginasDe(pdf); await pdf.destroy();
       const doc = LECTOR.documento(pags, "articulos"); const fm = (doc.meta || {}).fecha_ultima_reforma || c.f;
-      if (listos.has(fm)) { R.err.push(c.f + ": repetida (" + fm + ")"); continue; } listos.add(fm);
+      if (listos.has(fm)) { R.err.push(c.f + ": repetida (" + fm + ")"); return; } listos.add(fm);
       const us = doc.unidades; const d = delta(us, ref);
       R.versiones.push({ f: fm, fPortada: c.f, tipo: c.tipo, meta: doc.meta, archivo: c.o, ts: c.ts, paginas: pags.length, num: us.length, cambios: d.filter(x => !Array.isArray(x)).length, chk: fnv8(us.map(canon).join("\n")), u: d });
       ref = { units: us }; log(E.clave + " " + fm + ": " + us.length + " disposiciones, " + R.versiones[R.versiones.length - 1].cambios + " distintas");
-    } catch (e) { R.err.push(c.f + ": " + String(e.message || e).slice(0, 100)); log(E.clave + " " + c.f + " ERROR " + e.message); }
+    })(), 600000, "lectura completa"); } catch (e) { R.err.push(c.f + ": " + String(e.message || e).slice(0, 100)); log(E.clave + " " + c.f + " ERROR " + e.message); }
     await espera(1500); }
   R.fin = true; }
 (async () => { try { await cargar(); log("listo pdf.js y lector");
