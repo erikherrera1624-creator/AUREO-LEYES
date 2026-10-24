@@ -20,6 +20,11 @@ def claves(us):
     c, out = {}, []
     for u in us: n = c.get(u['nn'], 0); c[u['nn']] = n + 1; out.append(f"{u['nn']}#{n}")
     return out
+def fnv8(st):
+    h = 0x811c9dc5; b = st.encode('utf-16-le')
+    for q in range(0, len(b), 2): h ^= b[q] | (b[q + 1] << 8); h = (h * 0x01000193) & 0xffffffff
+    return format(h, '08x')
+canon = lambda u: '|'.join(str(u.get(f) or '') for f in ('tipo', 'nn', 'titulo', 'ubicacion', 'texto'))
 def reconstruir(delta, ref):
     rk = dict(zip(claves(ref), ref)); us = []
     for e in delta:
@@ -43,6 +48,8 @@ for clave, L in D.items():
     for v in L['versiones']:
         us = reconstruir(v['u'], ref)
         assert len(us) == v['num'], (clave, v['f'], len(us), v['num'])
+        if v.get('chk') and fnv8('\n'.join(canon(u) for u in us)) != v['chk']:
+            raise SystemExit(f'{clave} {v["f"]}: el texto reconstruido no coincide con el leído (huella distinta); no se publica')
         ref = us; armadas.append((v, us))
     # 2) fecha efectiva: la última reforma declarada en la portada; si las notas de reforma del propio texto traen
     #    fechas posteriores (portada sin «última reforma»), manda la nota más reciente
