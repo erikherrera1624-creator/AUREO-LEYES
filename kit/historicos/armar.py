@@ -55,12 +55,14 @@ for clave, L in D.items():
     #    fechas posteriores (portada sin «última reforma»), manda la nota más reciente
     porf = {}
     for v, us in armadas:
-        notas = sorted({f for u in us if u.get('tipo') != 'transitorio' for f in (u.get('fechas') or '').split(',') if f and f <= HOY})
+        # fechas de reforma conocidas que el propio texto cita: notas de los artículos y transitorios de cada decreto incorporado
+        conocidas = set(fechas_ref)
+        citadas = sorted({f for u in us for f in (u.get('fechas') or '').split(',') if f and f <= HOY and f in conocidas})
         f, deducida = v['f'], False
         sin_portada = v.get('tipo') == 'original' or not (v.get('meta') or {}).get('ultima_reforma')
-        if sin_portada and notas and notas[-1] > f:   # la portada no dice la última reforma: se toma la reforma conocida más reciente citada en sus notas
-            conocidas = [x for x in notas if x in set(fechas_ref)]
-            f, deducida = (conocidas or notas)[-1], True
+        if citadas and citadas[-1] > f:
+            # la compilación incluye un decreto posterior a la fecha de su portada (portada sin «última reforma» o desactualizada)
+            f, deducida = citadas[-1], True
         if f >= desde_actual: print(f'  {clave}: se omite la copia de {v["ts"]} (corresponde a la versión vigente, {f})'); continue
         if f in porf and porf[f][0]['ts'] >= v['ts']: continue
         porf[f] = (v, us, deducida)
@@ -80,13 +82,13 @@ for clave, L in D.items():
         ver = dict(id=f'hist_{clave}_{f}', etiqueta=etq, reforma=meta.get('ultima_reforma') or f'DOF {f[8:10]}-{f[5:7]}-{f[:4]}', fecha_reforma=f, desde=f, hasta=hasta,
                    ejercicio=None, vigente=False, num=len(us), paginas=v['paginas'], historico=True,
                    aviso=f'Versión anterior: compilación de la Cámara de Diputados tal como estaba publicada el {captura} (copia conservada por Internet Archive). '
-                         + ('La fecha de la última reforma se tomó de las notas de reforma del propio texto. ' if deducida else '')
+                         + ('La fecha de la última reforma se tomó de las notas de reforma y de los transitorios que trae el propio texto (la portada de la copia no la indicaba o no estaba al día). ' if deducida else '')
                          + 'Para sustentar un acto, coteje con el decreto publicado en el Diario Oficial.',
                    archivo=v['archivo'].split('/')[-1], sha256=sha, fuente=archivada, fuente_original=v['archivo'].replace(':80/', '/'), capturado=f"{v['ts'][:4]}-{v['ts'][4:6]}-{v['ts'][6:8]}",
                    obtenido=HOY, verificacion='copia archivada de la compilación oficial', precargado=True)
         salida.append({'clave': clave, 'version': ver, 'b64': base64.b64encode(gzip.compress(cuerpo.encode(), 9)).decode()})
         idx.append({k: ver[k] for k in ('id', 'etiqueta', 'fecha_reforma', 'desde', 'hasta', 'historico', 'num', 'capturado')})
-        print(f'  {clave} {f}{" (fecha de las notas)" if deducida else ""}: {len(us)} disposiciones, hasta {hasta}')
+        print(f'  {clave} {f}{" (fecha tomada del texto)" if deducida else ""}: {len(us)} disposiciones, hasta {hasta}')
     texto = json.dumps(salida, ensure_ascii=False, separators=(',', ':'))
     open(f'{R}/historicos/{clave}.json', 'w').write(texto)
     con = {v['fecha_reforma'] for v in idx} | {desde_actual}

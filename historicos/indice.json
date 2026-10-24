@@ -4,7 +4,7 @@
  "leyes": {
   "lisr": {
    "archivo": "lisr.json",
-   "v": "32f4cd578b53",
+   "v": "8f56b6baa862",
    "bytes": 2039729,
    "versiones": [
     {
@@ -84,7 +84,7 @@
   },
   "liva": {
    "archivo": "liva.json",
-   "v": "7e6e91d59825",
+   "v": "d584e095f770",
    "bytes": 774215,
    "versiones": [
     {
@@ -182,7 +182,7 @@
   },
   "cff": {
    "archivo": "cff.json",
-   "v": "426ceb30046d",
+   "v": "a88fa6eae50f",
    "bytes": 6172439,
    "versiones": [
     {
@@ -428,8 +428,8 @@
   },
   "lieps": {
    "archivo": "lieps.json",
-   "v": "6833348625f5",
-   "bytes": 778703,
+   "v": "cf47f6049566",
+   "bytes": 778804,
    "versiones": [
     {
      "id": "hist_lieps_2007-10-01",
@@ -452,16 +452,6 @@
      "capturado": "2008-09-12"
     },
     {
-     "id": "hist_lieps_2008-07-11",
-     "etiqueta": "Texto del 11/07/2008 al 26/11/2009 (última reforma DOF 11/07/2008)",
-     "fecha_reforma": "2008-07-11",
-     "desde": "2008-07-11",
-     "hasta": "2009-11-27",
-     "historico": true,
-     "num": 75,
-     "capturado": "2011-09-11"
-    },
-    {
      "id": "hist_lieps_2010-04-28",
      "etiqueta": "Texto del 28/04/2010 al 18/11/2010 (última reforma DOF 28/04/2010)",
      "fecha_reforma": "2010-04-28",
@@ -470,6 +460,16 @@
      "historico": true,
      "num": 73,
      "capturado": "2010-11-22"
+    },
+    {
+     "id": "hist_lieps_2010-11-19",
+     "etiqueta": "Texto del 19/11/2010 al 11/12/2011 (última reforma DOF 19/11/2010)",
+     "fecha_reforma": "2010-11-19",
+     "desde": "2010-11-19",
+     "hasta": "2011-12-12",
+     "historico": true,
+     "num": 75,
+     "capturado": "2011-09-11"
     },
     {
      "id": "hist_lieps_2011-12-12",
@@ -533,14 +533,13 @@
     }
    ],
    "sin_copia": [
-    "2009-11-27",
-    "2010-11-19"
+    "2009-11-27"
    ]
   },
   "lss": {
    "archivo": "lss.json",
-   "v": "4fad197cd9b9",
-   "bytes": 2944229,
+   "v": "51b38748e562",
+   "bytes": 2944318,
    "versiones": [
     {
      "id": "hist_lss_2006-08-11",
@@ -760,8 +759,8 @@
   },
   "lifnvt": {
    "archivo": "lifnvt.json",
-   "v": "5b431e7ea10e",
-   "bytes": 827964,
+   "v": "85fd803cf662",
+   "bytes": 828053,
    "versiones": [
     {
      "id": "hist_lifnvt_2005-06-01",
@@ -911,7 +910,7 @@
   },
   "ladua": {
    "archivo": "ladua.json",
-   "v": "97d8f3463de7",
+   "v": "0c6fa15ef66b",
    "bytes": 1321884,
    "versiones": [
     {
@@ -1001,7 +1000,7 @@
   },
   "lcf": {
    "archivo": "lcf.json",
-   "v": "5c01cfbc8571",
+   "v": "f2ff1cba0374",
    "bytes": 697733,
    "versiones": [
     {
@@ -1116,6 +1115,376 @@
     }
    ],
    "sin_copia": []
+  },
+  "lfd": {
+   "archivo": "lfd.json",
+   "v": "023587ace991",
+   "bytes": 7994416,
+   "versiones": [
+    {
+     "id": "hist_lfd_2006-12-27",
+     "etiqueta": "Texto del 27/12/2006 al 30/09/2007 (última reforma DOF 27/12/2006)",
+     "fecha_reforma": "2006-12-27",
+     "desde": "2006-12-27",
+     "hasta": "2007-10-01",
+     "historico": true,
+     "num": 660,
+     "capturado": "2007-03-15"
+    },
+    {
+     "id": "hist_lfd_2007-10-01",
+     "etiqueta": "Texto del 01/10/2007 al 23/12/2007 (última reforma DOF 01/10/2007)",
+     "fecha_reforma": "2007-10-01",
+     "desde": "2007-10-01",
+     "hasta": "2007-12-24",
+     "historico": true,
+     "num": 661,
+     "capturado": "2007-11-22"
+    },
+    {
+     "id": "hist_lfd_2007-12-24",
+     "etiqueta": "Texto del 24/12/2007 al 12/11/2008 (última reforma DOF 24/12/2007)",
+     "fecha_reforma": "2007-12-24",
+     "desde": "2007-12-24",
+     "hasta": "2008-11-13",
+     "historico": true,
+     "num": 666,
+     "capturado": "2008-09-12"
+    },
+    {
+     "id": "hist_lfd_2010-11-18",
+     "etiqueta": "Texto del 18/11/2010 al 11/12/2011 (última reforma DOF 18/11/2010)",
+     "fecha_reforma": "2010-11-18",
+     "desde": "2010-11-18",
+     "hasta": "2011-12-12",
+     "historico": true,
+     "num": 691,
+     "capturado": "2011-04-20"
+    },
+    {
+     "id": "hist_lfd_2011-12-15",
+     "etiqueta": "Texto del 15/12/2011 al 08/04/2012 (última reforma DOF 15/12/2011)",
+     "fecha_reforma": "2011-12-15",
+     "desde": "2011-12-15",
+     "hasta": "2012-04-09",
+     "historico": true,
+     "num": 694,
+     "capturado": "2012-03-16"
+    },
+    {
+     "id": "hist_lfd_2012-04-09",
+     "etiqueta": "Texto del 09/04/2012 al 13/06/2012 (última reforma DOF 09/04/2012)",
+     "fecha_reforma": "2012-04-09",
+     "desde": "2012-04-09",
+     "hasta": "2012-06-14",
+     "historico": true,
+     "num": 695,
+     "capturado": "2013-06-14"
+    },
+    {
+     "id": "hist_lfd_2013-12-11",
+     "etiqueta": "Texto del 11/12/2013 al 12/06/2014 (última reforma DOF 11/12/2013)",
+     "fecha_reforma": "2013-12-11",
+     "desde": "2013-12-11",
+     "hasta": "2014-06-13",
+     "historico": true,
+     "num": 701,
+     "capturado": "2014-02-26"
+    },
+    {
+     "id": "hist_lfd_2014-06-13",
+     "etiqueta": "Texto del 13/06/2014 al 10/08/2014 (última reforma DOF 13/06/2014)",
+     "fecha_reforma": "2014-06-13",
+     "desde": "2014-06-13",
+     "hasta": "2014-08-11",
+     "historico": true,
+     "num": 702,
+     "capturado": "2014-07-22"
+    },
+    {
+     "id": "hist_lfd_2014-08-11",
+     "etiqueta": "Texto del 11/08/2014 al 17/11/2015 (última reforma DOF 11/08/2014)",
+     "fecha_reforma": "2014-08-11",
+     "desde": "2014-08-11",
+     "hasta": "2015-11-18",
+     "historico": true,
+     "num": 704,
+     "capturado": "2015-07-24"
+    },
+    {
+     "id": "hist_lfd_2016-12-07",
+     "etiqueta": "Texto del 07/12/2016 al 27/12/2018 (última reforma DOF 07/12/2016)",
+     "fecha_reforma": "2016-12-07",
+     "desde": "2016-12-07",
+     "hasta": "2018-12-28",
+     "historico": true,
+     "num": 709,
+     "capturado": "2018-01-27"
+    },
+    {
+     "id": "hist_lfd_2018-12-28",
+     "etiqueta": "Texto del 28/12/2018 al 08/12/2019 (última reforma DOF 28/12/2018)",
+     "fecha_reforma": "2018-12-28",
+     "desde": "2018-12-28",
+     "hasta": "2019-12-09",
+     "historico": true,
+     "num": 711,
+     "capturado": "2019-10-20"
+    },
+    {
+     "id": "hist_lfd_2019-12-09",
+     "etiqueta": "Texto del 09/12/2019 al 05/11/2020 (última reforma DOF 09/12/2019)",
+     "fecha_reforma": "2019-12-09",
+     "desde": "2019-12-09",
+     "hasta": "2020-11-06",
+     "historico": true,
+     "num": 713,
+     "capturado": "2020-01-31"
+    },
+    {
+     "id": "hist_lfd_2020-12-08",
+     "etiqueta": "Texto del 08/12/2020 al 19/05/2021 (última reforma DOF 08/12/2020)",
+     "fecha_reforma": "2020-12-08",
+     "desde": "2020-12-08",
+     "hasta": "2021-05-20",
+     "historico": true,
+     "num": 722,
+     "capturado": "2021-04-22"
+    },
+    {
+     "id": "hist_lfd_2021-05-20",
+     "etiqueta": "Texto del 20/05/2021 al 11/11/2021 (última reforma DOF 20/05/2021)",
+     "fecha_reforma": "2021-05-20",
+     "desde": "2021-05-20",
+     "hasta": "2021-11-12",
+     "historico": true,
+     "num": 723,
+     "capturado": "2021-08-27"
+    },
+    {
+     "id": "hist_lfd_2021-11-12",
+     "etiqueta": "Texto del 12/11/2021 al 13/11/2022 (última reforma DOF 12/11/2021)",
+     "fecha_reforma": "2021-11-12",
+     "desde": "2021-11-12",
+     "hasta": "2022-11-14",
+     "historico": true,
+     "num": 727,
+     "capturado": "2022-01-19"
+    },
+    {
+     "id": "hist_lfd_2022-11-14",
+     "etiqueta": "Texto del 14/11/2022 al 02/05/2023 (última reforma DOF 14/11/2022)",
+     "fecha_reforma": "2022-11-14",
+     "desde": "2022-11-14",
+     "hasta": "2023-05-03",
+     "historico": true,
+     "num": 727,
+     "capturado": "2023-03-07"
+    },
+    {
+     "id": "hist_lfd_2023-05-03",
+     "etiqueta": "Texto del 03/05/2023 al 12/11/2023 (última reforma DOF 03/05/2023)",
+     "fecha_reforma": "2023-05-03",
+     "desde": "2023-05-03",
+     "hasta": "2023-11-13",
+     "historico": true,
+     "num": 728,
+     "capturado": "2023-06-04"
+    },
+    {
+     "id": "hist_lfd_2023-11-13",
+     "etiqueta": "Texto del 13/11/2023 al 22/04/2024 (última reforma DOF 13/11/2023)",
+     "fecha_reforma": "2023-11-13",
+     "desde": "2023-11-13",
+     "hasta": "2024-04-23",
+     "historico": true,
+     "num": 731,
+     "capturado": "2024-04-05"
+    },
+    {
+     "id": "hist_lfd_2024-04-23",
+     "etiqueta": "Texto del 23/04/2024 al 18/12/2024 (última reforma DOF 23/04/2024)",
+     "fecha_reforma": "2024-04-23",
+     "desde": "2024-04-23",
+     "hasta": "2024-12-19",
+     "historico": true,
+     "num": 733,
+     "capturado": "2024-10-07"
+    },
+    {
+     "id": "hist_lfd_2024-12-19",
+     "etiqueta": "Texto del 19/12/2024 al 06/11/2025 (última reforma DOF 19/12/2024)",
+     "fecha_reforma": "2024-12-19",
+     "desde": "2024-12-19",
+     "hasta": "2025-11-07",
+     "historico": true,
+     "num": 734,
+     "capturado": "2025-05-05"
+    }
+   ],
+   "sin_copia": [
+    "2008-11-13",
+    "2009-06-05",
+    "2009-11-27",
+    "2011-12-12",
+    "2012-06-14",
+    "2015-11-18",
+    "2020-11-06"
+   ]
+  },
+  "lft": {
+   "archivo": "lft.json",
+   "v": "d48c581f4277",
+   "bytes": 4827856,
+   "versiones": [
+    {
+     "id": "hist_lft_2006-01-17",
+     "etiqueta": "Texto del 17/01/2006 al 08/04/2012 (última reforma DOF 17/01/2006)",
+     "fecha_reforma": "2006-01-17",
+     "desde": "2006-01-17",
+     "hasta": "2012-04-09",
+     "historico": true,
+     "num": 1075,
+     "capturado": "2010-08-20"
+    },
+    {
+     "id": "hist_lft_2012-04-09",
+     "etiqueta": "Texto del 09/04/2012 al 29/11/2012 (última reforma DOF 09/04/2012)",
+     "fecha_reforma": "2012-04-09",
+     "desde": "2012-04-09",
+     "hasta": "2012-11-30",
+     "historico": true,
+     "num": 1076,
+     "capturado": "2012-05-11"
+    },
+    {
+     "id": "hist_lft_2012-11-30",
+     "etiqueta": "Texto del 30/11/2012 al 11/06/2015 (última reforma DOF 30/11/2012)",
+     "fecha_reforma": "2012-11-30",
+     "desde": "2012-11-30",
+     "hasta": "2015-06-12",
+     "historico": true,
+     "num": 1135,
+     "capturado": "2014-09-03"
+    },
+    {
+     "id": "hist_lft_2022-05-18",
+     "etiqueta": "Texto del 18/05/2022 al 26/12/2022 (última reforma DOF 18/05/2022)",
+     "fecha_reforma": "2022-05-18",
+     "desde": "2022-05-18",
+     "hasta": "2022-12-27",
+     "historico": true,
+     "num": 1256,
+     "capturado": "2022-06-12"
+    },
+    {
+     "id": "hist_lft_2022-12-27",
+     "etiqueta": "Texto del 27/12/2022 al 28/11/2023 (última reforma DOF 27/12/2022)",
+     "fecha_reforma": "2022-12-27",
+     "desde": "2022-12-27",
+     "hasta": "2023-11-29",
+     "historico": true,
+     "num": 1257,
+     "capturado": "2023-11-06"
+    },
+    {
+     "id": "hist_lft_2023-11-29",
+     "etiqueta": "Texto del 29/11/2023 al 03/12/2023 (última reforma DOF 29/11/2023)",
+     "fecha_reforma": "2023-11-29",
+     "desde": "2023-11-29",
+     "hasta": "2023-12-04",
+     "historico": true,
+     "num": 1258,
+     "capturado": "2023-12-13"
+    },
+    {
+     "id": "hist_lft_2024-01-24",
+     "etiqueta": "Texto del 24/01/2024 al 03/04/2024 (última reforma DOF 24/01/2024)",
+     "fecha_reforma": "2024-01-24",
+     "desde": "2024-01-24",
+     "hasta": "2024-04-04",
+     "historico": true,
+     "num": 1264,
+     "capturado": "2024-01-27"
+    },
+    {
+     "id": "hist_lft_2024-04-04",
+     "etiqueta": "Texto del 04/04/2024 al 29/09/2024 (última reforma DOF 04/04/2024)",
+     "fecha_reforma": "2024-04-04",
+     "desde": "2024-04-04",
+     "hasta": "2024-09-30",
+     "historico": true,
+     "num": 1265,
+     "capturado": "2024-04-26"
+    },
+    {
+     "id": "hist_lft_2024-09-30",
+     "etiqueta": "Texto del 30/09/2024 al 15/12/2024 (última reforma DOF 30/09/2024)",
+     "fecha_reforma": "2024-09-30",
+     "desde": "2024-09-30",
+     "hasta": "2024-12-16",
+     "historico": true,
+     "num": 1266,
+     "capturado": "2024-10-09"
+    },
+    {
+     "id": "hist_lft_2024-12-16",
+     "etiqueta": "Texto del 16/12/2024 al 18/12/2024 (última reforma DOF 16/12/2024)",
+     "fecha_reforma": "2024-12-16",
+     "desde": "2024-12-16",
+     "hasta": "2024-12-19",
+     "historico": true,
+     "num": 1267,
+     "capturado": "2025-01-28"
+    },
+    {
+     "id": "hist_lft_2024-12-24",
+     "etiqueta": "Texto del 24/12/2024 al 20/02/2025 (última reforma DOF 24/12/2024)",
+     "fecha_reforma": "2024-12-24",
+     "desde": "2024-12-24",
+     "hasta": "2025-02-21",
+     "historico": true,
+     "num": 1291,
+     "capturado": "2025-02-09"
+    },
+    {
+     "id": "hist_lft_2025-02-21",
+     "etiqueta": "Texto del 21/02/2025 al 14/01/2026 (última reforma DOF 21/02/2025)",
+     "fecha_reforma": "2025-02-21",
+     "desde": "2025-02-21",
+     "hasta": "2026-01-15",
+     "historico": true,
+     "num": 1292,
+     "capturado": "2025-03-17"
+    },
+    {
+     "id": "hist_lft_2026-01-15",
+     "etiqueta": "Texto del 15/01/2026 al 30/04/2026 (última reforma DOF 15/01/2026)",
+     "fecha_reforma": "2026-01-15",
+     "desde": "2026-01-15",
+     "hasta": "2026-05-01",
+     "historico": true,
+     "num": 1293,
+     "capturado": "2026-02-04"
+    }
+   ],
+   "sin_copia": [
+    "2015-06-12",
+    "2018-05-30",
+    "2018-06-22",
+    "2019-05-01",
+    "2019-06-04",
+    "2019-07-02",
+    "2021-01-11",
+    "2021-03-30",
+    "2021-04-23",
+    "2021-07-31",
+    "2022-04-05",
+    "2022-04-28",
+    "2023-12-04",
+    "2024-12-19",
+    "2026-05-01"
+   ]
   }
  }
 }
