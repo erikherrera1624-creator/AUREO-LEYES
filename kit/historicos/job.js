@@ -55,8 +55,9 @@ async function portada(ts, original) { // solo las primeras páginas (pedidos pa
 async function ley(E) {
   const R = { clave: E.clave, versiones: [], err: [], candidatos: [] }; H.res[E.clave] = R; H.estado = E.clave + ": buscando copias";
   let filas = [];
-  for (const q of [`url=diputados.gob.mx/LeyesBiblio/pdf/${E.arch}.pdf`, `url=diputados.gob.mx/LeyesBiblio/pdf/${E.arch}_*`]) { try { filas = filas.concat(await cdx(q)); } catch (e) { R.err.push("cdx " + q + ": " + e.message); } await espera(2500); }
-  filas = filas.filter(([o, ts, len, dg, mt]) => /pdf/i.test(mt || "") && +len > 200000 && new RegExp("/pdf/" + E.arch + "(_\\d{6,8})?\\.pdf$", "i").test(o.split("?")[0]));
+  const qs = [`url=diputados.gob.mx/LeyesBiblio/pdf/${E.arch}.pdf`, `url=diputados.gob.mx/LeyesBiblio/pdf/${E.arch}_*`].concat(E.num ? [`url=diputados.gob.mx/LeyesBiblio/pdf/${E.num}.pdf`, `url=diputados.gob.mx/LeyesBiblio/pdf/${E.num}_*`] : []);
+  for (const q of qs) { try { filas = filas.concat(await cdx(q)); } catch (e) { R.err.push("cdx " + q + ": " + e.message); } await espera(2500); }
+  filas = filas.filter(([o, ts, len, dg, mt]) => /pdf/i.test(mt || "") && +len > 200000 && new RegExp("/pdf/(" + E.arch + (E.num ? "|" + E.num : "") + ")(_\\d{6,8})?\\.pdf$", "i").test(o.split("?")[0]));
   const vistos = new Set(); const cand = [];
   for (const [o, ts, len, dg] of filas) { if (vistos.has(dg)) continue; vistos.add(dg);
     const md = /_(\d{2})(\d{2})(\d{2,4})\.pdf$/i.exec(o); cand.push({ o, ts, len: +len, dg, fNombre: md ? iso(md[3], md[2], md[1]) : null }); }
